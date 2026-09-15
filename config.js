@@ -1,0 +1,3 @@
+window.HANKKI_CONFIG = {
+  KAKAO_JS_KEY: "01d73f0313552131d197acc30acfa923"
+};
