@@ -1,0 +1,69 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>한끼발견 HOME 3.1 CHECK-IN</title>
+<style>
+:root{--g:#119b75;--ink:#202723;--muted:#718078;--cream:#fff9ed;--coral:#f26e5e}
+*{box-sizing:border-box}html,body{margin:0;background:#f2f4f2;color:var(--ink);font-family:Arial,"Noto Sans KR",sans-serif}button,input{font:inherit}button{cursor:pointer}.app{width:min(100%,820px);margin:auto;min-height:100dvh;background:#fffdf9;padding-bottom:92px}
+.hero{height:150px;background:url("assets/mobile_header_clean.webp") center/cover no-repeat;position:relative}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(#fff0,rgba(255,255,255,.05))}
+.location{position:absolute;left:10px;top:max(6px,env(safe-area-inset-top));z-index:3;border:0;border-radius:999px;background:#fffffff0;padding:7px 9px;font-size:10px;font-weight:900}.actions{position:absolute;right:8px;top:max(5px,env(safe-area-inset-top));z-index:3;display:flex}.actions button{width:34px;height:34px;border:0;background:transparent;font-size:17px}
+.search{display:flex;gap:7px;margin:-3px 10px 12px}.search input{flex:1;min-width:0;height:48px;border:1px solid #dde3df;border-radius:16px;padding:0 13px;background:#fff}.search button{border:0;border-radius:14px;background:#e5f7f1;color:#087b5b;font-weight:900;padding:0 13px}
+.today{margin:0 10px 11px;padding:15px;border-radius:21px;background:linear-gradient(120deg,#e8faf5,#fff8e8);border:1px solid #e3eee9}.todayTop{display:flex;justify-content:space-between;align-items:start}.today small{color:#66776f}.today h2{font-size:21px;margin:3px 0}.todayCount{border-radius:999px;background:#fff;padding:7px 10px;font-size:10px;font-weight:900;color:#138462}.mission{margin-top:12px;padding:13px;border-radius:17px;background:#fff;box-shadow:0 4px 14px #27443a0c}.missionHead{display:flex;justify-content:space-between;gap:10px}.mission b{font-size:14px}.mission p{font-size:11px;color:#617169;margin:5px 0 10px}.distance{font-size:9px;color:#7b8782}.answer{display:grid;grid-template-columns:1fr 1fr;gap:7px}.answer button{border:0;border-radius:12px;padding:10px;font-weight:900}.yes{background:#e5f8f2;color:#0c7d5d}.no{background:#fff0ec;color:#c85c4d}.reward{display:none;margin-top:9px;border-radius:12px;background:#fff7d8;padding:9px;text-align:center;font-size:11px;font-weight:900}
+.level{margin:0 10px 11px;padding:13px 15px;border-radius:19px;background:#fff;border:1px solid #eceeed}.levelTop{display:flex;justify-content:space-between}.level b{font-size:14px}.level span{font-size:10px;color:#128363}.bar{height:8px;border-radius:99px;background:#edf1ef;margin-top:9px;overflow:hidden}.bar i{display:block;width:72%;height:100%;background:linear-gradient(90deg,#42bd94,#159b74)}
+.quick{margin:0 10px 12px}.quick h3,.discovered h3,.local h3{font-size:17px;margin:0 0 8px}.quickRow{display:flex;gap:7px;overflow:auto}.quickRow button{flex:0 0 auto;border:1px solid #e7ebe8;border-radius:999px;background:#fff;padding:10px 13px;font-size:11px;font-weight:900}.quickRow button:first-child{background:#159b74;color:#fff}
+.discovered{margin:0 10px 12px}.cards{display:flex;gap:8px;overflow-x:auto;padding-bottom:3px}.card{flex:0 0 46%;min-width:155px;border:1px solid #eceeed;border-radius:16px;background:#fff;overflow:hidden}.card img{width:100%;height:100px;object-fit:cover}.cardBody{padding:9px}.cardBody b{display:block;font-size:14px}.cardBody strong{display:block;font-size:11px;color:#5d7080;margin:4px 0}.cardBody small{font-size:9px;color:#6f7d77}
+.local{margin:0 10px 12px;padding:14px;border-radius:19px;background:linear-gradient(110deg,#fff8e6,#eef9f5)}.local small{color:#7c817e}.localRow{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.localRow button{border:1px solid #e9e4d8;border-radius:13px;background:#fff;padding:10px 5px;font-size:10px;font-weight:900}
+.mapbox{margin:0 10px 18px;padding:15px;border-radius:19px;background:#eef8ff;border:1px solid #e0ebf1;display:flex;justify-content:space-between;align-items:center}.mapbox b{font-size:15px}.mapbox small{display:block;font-size:9px;color:#687b85;margin-top:3px}.mapbox button{border:0;border-radius:12px;background:#fff;padding:10px;font-weight:900;color:#356b80}
+.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,820px);height:72px;background:#fff;border-top:1px solid #e7ece9;box-shadow:0 -7px 22px #243c3310;display:grid;grid-template-columns:repeat(4,1fr);z-index:100}.nav button{border:0;background:#fff;color:#6d7d87;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;font-weight:900}.nav .active{color:#159b74;background:#effaf6}.nav svg{width:23px;height:23px;fill:currentColor;margin-bottom:3px}
+.screen{display:none;position:fixed;inset:0;background:#fff;z-index:500;overflow:auto}.inner{width:min(100%,760px);margin:auto;padding:0 15px 30px}.head{height:60px;display:flex;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff}.back{width:44px;height:44px;border:0;background:transparent}.back svg{width:25px;fill:none;stroke:#24352f;stroke-width:2.2}.choice,.field{width:100%;border:1px solid #e2e6e4;border-radius:14px;background:#fff;padding:14px;margin:7px 0}
+.onboard{display:flex;position:fixed;inset:0;z-index:999;background:#eaf7fb;align-items:center;justify-content:center}.phone{position:relative;height:min(100dvh,812px);aspect-ratio:318/660}.slide{display:none;position:absolute;inset:0}.slide.active{display:block}.slide img{width:100%;height:100%}.skip{position:absolute;right:0;top:0;width:34%;height:14%;border:0;background:transparent}.next{position:absolute;left:4%;bottom:1%;width:92%;height:13%;border:0;background:transparent}
+@media(min-width:601px){.hero{height:175px;background-size:820px auto}.today,.level,.quick,.discovered,.local,.mapbox{margin-left:28px;margin-right:28px}.search{margin-left:28px;margin-right:28px}.card{flex-basis:30%}.card img{height:135px}.localRow button{font-size:12px}.quickRow{justify-content:center}}
+</style><style>
+/* HOME 3.1 — 10-second restaurant check-in */
+.checkinZone{background:linear-gradient(125deg,#e7faf4,#fff8e8)!important}
+.checkinCard,.questionCard,.menuCard{margin-top:11px;padding:13px;border-radius:17px;background:#fff;box-shadow:0 4px 14px #27443a0c}
+.placeLine{display:flex;justify-content:space-between;align-items:center;gap:8px}.placeLine b{display:block;font-size:15px;margin-top:2px}.visitBadge{border-radius:999px;background:#fff3d2;padding:6px 9px;font-size:9px;font-weight:900;color:#8b6827}.checkHint{font-size:10px;color:#66766f;margin:8px 0}.checkinBtn{width:100%;border:0;border-radius:13px;background:#129d76;color:#fff;padding:12px;font-weight:900}
+.questionCard,.menuCard,.checkResult{display:none}.questionCard small,.menuCard small{font-size:9px;color:#168363}.questionCard h3,.menuCard h3{font-size:15px;margin:4px 0 10px}.menuChoices{display:flex;gap:6px;overflow-x:auto}.menuChoices button{flex:0 0 auto;border:1px solid #e5e9e6;border-radius:999px;background:#fff;padding:9px 11px;font-size:10px;font-weight:800}.menuChoices button.selected{background:#e6f8f2;color:#087c5b;border-color:#bfe9db}.checkResult{margin-top:11px;border-radius:16px;background:#fff5cf;padding:12px;text-align:center}.checkResult b{display:block;font-size:14px}.checkResult span{display:block;font-size:11px;margin-top:4px}.checkResult small{display:block;font-size:9px;color:#79672e;margin-top:4px}
+@media(min-width:601px){.checkinCard,.questionCard,.menuCard,.checkResult{max-width:720px;margin-left:auto;margin-right:auto}}
+</style></head><body>
+<main class="app"><header class="hero"><button class="location" data-page="위치 설정">📍 부산 기장군 일광읍⌄</button><div class="actions"><button data-page="검색">⌕</button><button data-page="알림">♢</button><button data-page="마이">○</button></div></header>
+<div class="search"><input placeholder="지역, 식당명, 메뉴로 검색"><button data-page="검색">검색</button></div>
+<section class="today checkinZone">
+<div class="todayTop"><div><small>식당에 도착했다면</small><h2>오늘 한끼 체크인 🍚</h2></div><span class="todayCount">10초면 끝!</span></div>
+<div class="checkinCard" id="checkinCard">
+ <div class="placeLine"><div><span class="distance">📍 180m</span><b>일광돼지국밥</b></div><span class="visitBadge">방문 7회째</span></div>
+ <p class="checkHint">체크인하면 오늘의 현장 질문 하나가 열려요.</p>
+ <button id="checkinBtn" class="checkinBtn">오늘 한끼 체크인</button>
+</div>
+<div class="questionCard" id="questionCard">
+ <small>오늘의 현장 질문 · +5 발견점수</small>
+ <h3>가격 8,000원, 아직 맞나요?</h3>
+ <div class="answer"><button class="yes" data-answer="맞아요">✓ 맞아요</button><button class="no" data-answer="달라졌어요">달라졌어요</button></div>
+</div>
+<div class="menuCard" id="menuCard">
+ <small>선택사항</small><h3>오늘 뭐 먹었어요?</h3>
+ <div class="menuChoices"><button data-menu="돼지국밥">돼지국밥 · 8,000원</button><button data-menu="순대국밥">순대국밥 · 9,000원</button><button data-menu="기록 안 함">건너뛰기</button></div>
+</div>
+<div id="checkResult" class="checkResult"><b>🎉 오늘 체크인 완료!</b><span>+8 발견점수 · 일광돼지국밥 방문 7회</span><small>단골 발견자까지 3회 남았어요.</small></div>
+</section>
+<section class="level"><div class="levelTop"><b>🌱 동네 발견자 Lv.3</b><span>발견점수 720</span></div><div class="bar"><i></i></div></section>
+<section class="quick"><h3>지금 뭐 먹지?</h3><div class="quickRow"><button data-page="내 주변">내 주변</button><button data-page="킹성비">👑 킹성비</button><button data-page="혼밥">혼밥</button><button data-page="아이와">아이와</button><button data-page="AI 한끼">◉ AI 한끼</button></div></section>
+<section class="discovered"><h3>🔥 오늘 동네에서 발견된 곳</h3><div class="cards"><article class="card" data-page="일광돼지국밥"><img src="assets/food1.webp"><div class="cardBody"><b>일광돼지국밥</b><strong>6,500원</strong><small>가격정보 오늘 확인</small></div></article><article class="card" data-page="바다향 파스타"><img src="assets/food2.webp"><div class="cardBody"><b>바다향 파스타</b><strong>9,000원</strong><small>킹성비 발견</small></div></article><article class="card" data-page="카페 모먼트"><img src="assets/food3.webp"><div class="cardBody"><b>카페 모먼트</b><strong>3,500원</strong><small>새로 발견된 카페</small></div></article></div></section>
+<section class="local"><small>부산 기장군 일광읍</small><h3>이 동네 뭐 먹지?</h3><div class="localRow"><button data-page="로컬 간식">로컬 간식</button><button data-page="지역 특산물">지역 특산물</button><button data-page="시장 먹거리">시장 먹거리</button></div></section>
+<section class="mapbox"><div><b>🗺️ 내 발견지도</b><small>확인한 식당 18곳 · 최초발견 2곳</small></div><button data-page="내 발견지도">지도 보기 ›</button></section></main>
+<nav class="nav"><button class="active"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10h-6v-7H9v7H3z"/></svg>홈</button><button data-page="현장발견"><svg viewBox="0 0 24 24"><path d="M7 7 8.5 5h7L17 7h3a2 2 0 0 1 2 2v10H2V9a2 2 0 0 1 2-2z"/><circle cx="12" cy="13" r="4" fill="white"/></svg>현장발견</button><button data-page="찜"><svg viewBox="0 0 24 24"><path d="M12 21S4 16.5 4 10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11z"/></svg>찜</button><button data-page="마이"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.5-5 3-7 8-7s7.5 2 8 7z"/></svg>마이</button></nav>
+<section id="screen" class="screen"><div class="inner"><header class="head"><button id="back" class="back"><svg viewBox="0 0 24 24"><path d="M15.5 5.5 9 12l6.5 6.5"/></svg></button><h2 id="title"></h2></header><div id="body"></div></div></section>
+<section id="onboard" class="onboard"><div class="phone"><div class="slide active"><img src="onboarding_1.webp"></div><div class="slide"><img src="onboarding_2.webp"></div><div class="slide"><img src="onboarding_3.webp"></div><button id="skip" class="skip"></button><button id="next" class="next"></button></div></section>
+<script>
+(function(){const S=document.getElementById("screen"),T=document.getElementById("title"),B=document.getElementById("body");function close(){S.style.display="none"}function open(n){T.textContent=n;B.innerHTML='<p>'+n+' 화면으로 정상 이동했습니다.</p>';S.style.display="block"}document.getElementById("back").onclick=close;document.querySelectorAll("[data-page]").forEach(x=>x.onclick=()=>open(x.dataset.page));document.querySelectorAll(".answer button").forEach(x=>x.onclick=()=>document.getElementById("reward").style.display="block");let i=0,ob=document.getElementById("onboard"),sl=[...document.querySelectorAll(".slide")];function paint(){sl.forEach((x,n)=>x.classList.toggle("active",n===i))}document.getElementById("skip").onclick=()=>ob.style.display="none";document.getElementById("next").onclick=()=>{if(i<2){i++;paint()}else ob.style.display="none"};paint()})();
+</script><script>
+(function(){
+ const c=document.getElementById("checkinBtn"),q=document.getElementById("questionCard"),m=document.getElementById("menuCard"),r=document.getElementById("checkResult");
+ if(!c)return;
+ c.addEventListener("click",function(){c.textContent="✓ 체크인했어요";c.disabled=true;q.style.display="block";});
+ document.querySelectorAll("#questionCard [data-answer]").forEach(b=>b.addEventListener("click",function(){
+   document.querySelectorAll("#questionCard [data-answer]").forEach(x=>x.style.opacity=".55");
+   b.style.opacity="1";m.style.display="block";
+ }));
+ document.querySelectorAll("#menuCard [data-menu]").forEach(b=>b.addEventListener("click",function(){
+   document.querySelectorAll("#menuCard [data-menu]").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");r.style.display="block";
+ }));
+})();
+</script></body></html>
