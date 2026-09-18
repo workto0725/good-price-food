@@ -1,0 +1,860 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>한끼발견 HOME 3.29 FAVORITES</title>
+<style>
+:root{--g:#119b75;--ink:#202723;--muted:#718078;--cream:#fff9ed;--coral:#f26e5e}
+*{box-sizing:border-box}html,body{margin:0;background:#f2f4f2;color:var(--ink);font-family:Arial,"Noto Sans KR",sans-serif}button,input{font:inherit}button{cursor:pointer}.app{width:min(100%,820px);margin:auto;min-height:100dvh;background:#fffdf9;padding-bottom:92px}
+.hero{height:150px;background:url("assets/mobile_header_clean.webp") center/cover no-repeat;position:relative}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(#fff0,rgba(255,255,255,.05))}
+.location{position:absolute;left:10px;top:max(6px,env(safe-area-inset-top));z-index:3;border:0;border-radius:999px;background:#fffffff0;padding:7px 9px;font-size:10px;font-weight:900}.actions{position:absolute;right:8px;top:max(5px,env(safe-area-inset-top));z-index:3;display:flex}.actions button{width:34px;height:34px;border:0;background:transparent;font-size:17px}
+.search{display:flex;gap:7px;margin:-3px 10px 12px}.search input{flex:1;min-width:0;height:48px;border:1px solid #dde3df;border-radius:16px;padding:0 13px;background:#fff}.search button{border:0;border-radius:14px;background:#e5f7f1;color:#087b5b;font-weight:900;padding:0 13px}
+.today{margin:0 10px 11px;padding:15px;border-radius:21px;background:linear-gradient(120deg,#e8faf5,#fff8e8);border:1px solid #e3eee9}.todayTop{display:flex;justify-content:space-between;align-items:start}.today small{color:#66776f}.today h2{font-size:21px;margin:3px 0}.todayCount{border-radius:999px;background:#fff;padding:7px 10px;font-size:10px;font-weight:900;color:#138462}.mission{margin-top:12px;padding:13px;border-radius:17px;background:#fff;box-shadow:0 4px 14px #27443a0c}.missionHead{display:flex;justify-content:space-between;gap:10px}.mission b{font-size:14px}.mission p{font-size:11px;color:#617169;margin:5px 0 10px}.distance{font-size:9px;color:#7b8782}.answer{display:grid;grid-template-columns:1fr 1fr;gap:7px}.answer button{border:0;border-radius:12px;padding:10px;font-weight:900}.yes{background:#e5f8f2;color:#0c7d5d}.no{background:#fff0ec;color:#c85c4d}.reward{display:none;margin-top:9px;border-radius:12px;background:#fff7d8;padding:9px;text-align:center;font-size:11px;font-weight:900}
+.level{margin:0 10px 11px;padding:13px 15px;border-radius:19px;background:#fff;border:1px solid #eceeed}.levelTop{display:flex;justify-content:space-between}.level b{font-size:14px}.level span{font-size:10px;color:#128363}.bar{height:8px;border-radius:99px;background:#edf1ef;margin-top:9px;overflow:hidden}.bar i{display:block;width:72%;height:100%;background:linear-gradient(90deg,#42bd94,#159b74)}
+.quick{margin:0 10px 12px}.quick h3,.discovered h3,.local h3{font-size:17px;margin:0 0 8px}.quickRow{display:flex;gap:7px;overflow:auto}.quickRow button{flex:0 0 auto;border:1px solid #e7ebe8;border-radius:999px;background:#fff;padding:10px 13px;font-size:11px;font-weight:900}.quickRow button:first-child{background:#159b74;color:#fff}
+.discovered{margin:0 10px 12px}.cards{display:flex;gap:8px;overflow-x:auto;padding-bottom:3px}.card{flex:0 0 46%;min-width:155px;border:1px solid #eceeed;border-radius:16px;background:#fff;overflow:hidden}.card img{width:100%;height:100px;object-fit:cover}.cardBody{padding:9px}.cardBody b{display:block;font-size:14px}.cardBody strong{display:block;font-size:11px;color:#5d7080;margin:4px 0}.cardBody small{font-size:9px;color:#6f7d77}
+.local{margin:0 10px 12px;padding:14px;border-radius:19px;background:linear-gradient(110deg,#fff8e6,#eef9f5)}.local small{color:#7c817e}.localRow{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.localRow button{border:1px solid #e9e4d8;border-radius:13px;background:#fff;padding:10px 5px;font-size:10px;font-weight:900}
+.mapbox{margin:0 10px 18px;padding:15px;border-radius:19px;background:#eef8ff;border:1px solid #e0ebf1;display:flex;justify-content:space-between;align-items:center}.mapbox b{font-size:15px}.mapbox small{display:block;font-size:9px;color:#687b85;margin-top:3px}.mapbox button{border:0;border-radius:12px;background:#fff;padding:10px;font-weight:900;color:#356b80}
+.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,820px);height:72px;background:#fff;border-top:1px solid #e7ece9;box-shadow:0 -7px 22px #243c3310;display:grid;grid-template-columns:repeat(4,1fr);z-index:100}.nav button{border:0;background:#fff;color:#6d7d87;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;font-weight:900}.nav .active{color:#159b74;background:#effaf6}.nav svg{width:23px;height:23px;fill:currentColor;margin-bottom:3px}
+.screen{display:none;position:fixed;inset:0;background:#fff;z-index:500;overflow:auto}.inner{width:min(100%,760px);margin:auto;padding:0 15px 30px}.head{height:60px;display:flex;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff}.back{width:44px;height:44px;border:0;background:transparent}.back svg{width:25px;fill:none;stroke:#24352f;stroke-width:2.2}.choice,.field{width:100%;border:1px solid #e2e6e4;border-radius:14px;background:#fff;padding:14px;margin:7px 0}
+.onboard{display:flex;position:fixed;inset:0;z-index:999;background:#eaf7fb;align-items:center;justify-content:center}.phone{position:relative;height:min(100dvh,812px);aspect-ratio:318/660}.slide{display:none;position:absolute;inset:0}.slide.active{display:block}.slide img{width:100%;height:100%}.skip{position:absolute;right:0;top:0;width:34%;height:14%;border:0;background:transparent}.next{position:absolute;left:4%;bottom:1%;width:92%;height:13%;border:0;background:transparent}
+@media(min-width:601px){.hero{height:175px;background-size:820px auto}.today,.level,.quick,.discovered,.local,.mapbox{margin-left:28px;margin-right:28px}.search{margin-left:28px;margin-right:28px}.card{flex-basis:30%}.card img{height:135px}.localRow button{font-size:12px}.quickRow{justify-content:center}}
+</style><style>
+/* HOME 3.1 — 10-second restaurant check-in */
+.checkinZone{background:linear-gradient(125deg,#e7faf4,#fff8e8)!important}
+.checkinCard,.questionCard,.menuCard{margin-top:11px;padding:13px;border-radius:17px;background:#fff;box-shadow:0 4px 14px #27443a0c}
+.placeLine{display:flex;justify-content:space-between;align-items:center;gap:8px}.placeLine b{display:block;font-size:15px;margin-top:2px}.visitBadge{border-radius:999px;background:#fff3d2;padding:6px 9px;font-size:9px;font-weight:900;color:#8b6827}.checkHint{font-size:10px;color:#66766f;margin:8px 0}.checkinBtn{width:100%;border:0;border-radius:13px;background:#129d76;color:#fff;padding:12px;font-weight:900}
+.questionCard,.menuCard,.checkResult{display:none}.questionCard small,.menuCard small{font-size:9px;color:#168363}.questionCard h3,.menuCard h3{font-size:15px;margin:4px 0 10px}.menuChoices{display:flex;gap:6px;overflow-x:auto}.menuChoices button{flex:0 0 auto;border:1px solid #e5e9e6;border-radius:999px;background:#fff;padding:9px 11px;font-size:10px;font-weight:800}.menuChoices button.selected{background:#e6f8f2;color:#087c5b;border-color:#bfe9db}.checkResult{margin-top:11px;border-radius:16px;background:#fff5cf;padding:12px;text-align:center}.checkResult b{display:block;font-size:14px}.checkResult span{display:block;font-size:11px;margin-top:4px}.checkResult small{display:block;font-size:9px;color:#79672e;margin-top:4px}
+@media(min-width:601px){.checkinCard,.questionCard,.menuCard,.checkResult{max-width:720px;margin-left:auto;margin-right:auto}}
+</style><style>
+/* HOME 3.2 — personal meal diary + taste map */
+.subQ{margin-top:14px!important}.miniChoices,.tagChoices{display:flex;gap:6px;overflow-x:auto}.miniChoices button,.tagChoices button{flex:0 0 auto;border:1px solid #e5e9e6;border-radius:999px;background:#fff;padding:9px 11px;font-size:10px;font-weight:800}.miniChoices button.selected,.tagChoices button.selected{background:#e6f8f2;color:#087c5b;border-color:#bfe9db}
+.ratingChoices{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.ratingChoices button{border:1px solid #e5e9e6;border-radius:14px;background:#fff;padding:10px 3px;font-size:20px}.ratingChoices b{display:block;font-size:9px;margin-top:3px}.ratingChoices button.selected{border:2px solid #129d76;background:#f0fbf7}
+.saveMeal{width:100%;border:0;border-radius:13px;background:#129d76;color:#fff;padding:12px;font-weight:900;margin-top:14px}
+.mealMap{margin:0 10px 18px;padding:14px;border-radius:19px;background:#f0f8f5;border:1px solid #dfebe6}.mapHead{display:flex;justify-content:space-between;align-items:center}.mapHead b{font-size:15px}.mapHead small{display:block;font-size:9px;color:#687a72;margin-top:3px}.mapHead button{border:0;background:transparent;color:#167c60;font-weight:900;font-size:10px}.mapCanvas{height:150px;margin-top:10px;border-radius:16px;background:linear-gradient(135deg,#e9f4e8,#eef6fb);position:relative;overflow:hidden}.road{position:absolute;background:#fff;border:1px solid #dfe8e3;border-radius:99px}.r1{width:120%;height:17px;left:-10%;top:44%;transform:rotate(-9deg)}.r2{width:18px;height:120%;left:57%;top:-10%;transform:rotate(13deg)}.pin{position:absolute;width:31px;height:31px;border:3px solid #fff;border-radius:50% 50% 50% 5px;transform:rotate(-45deg);box-shadow:0 3px 8px #30483e2a;font-weight:900}.pin>*{transform:rotate(45deg)}.pin.love{background:#ee5e67;color:#fff}.pin.value{background:#18a379;color:#fff}.pin.good{background:#f1c84d;color:#fff}.pin.bad{background:#7c748e;color:#fff}.pin{line-height:22px}.you{position:absolute;left:47%;top:70%;font-size:9px;color:#397466;font-weight:900}.legend{display:flex;gap:8px;overflow-x:auto;margin-top:9px}.legend span{white-space:nowrap;font-size:8px;color:#63736c}.mapStats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:9px}.mapStats b{background:#fff;border-radius:10px;padding:8px 2px;text-align:center;font-size:8px}
+@media(min-width:601px){.mealMap{margin-left:28px;margin-right:28px}.mapCanvas{height:220px}.mapStats b{font-size:11px}}
+</style><style>
+/* HOME 3.3 — choose restaurant before check-in */
+.pickIntro b{display:block;font-size:15px}.pickIntro small{display:block;font-size:9px;color:#68766f;margin-top:3px}
+.pickMain{width:100%;border:0;border-radius:13px;background:#e6f8f2;color:#087c5b;padding:12px;font-weight:900;margin-top:11px}
+.recentLabel{font-size:9px;color:#75817b;margin:12px 0 6px}.recentPlaces{display:grid;grid-template-columns:1fr 1fr;gap:7px}.placePick{border:1px solid #e5e9e6;border-radius:13px;background:#fff;padding:10px;text-align:left}.placePick b{display:block;font-size:11px}.placePick small,.placePick span{font-size:8px;color:#748079;margin-top:3px}.placePick.selected{border:2px solid #129d76;background:#f0fbf7}.newPlace{width:100%;border:0;background:transparent;color:#557068;font-size:10px;font-weight:900;padding:11px 0 2px}.nearList,.newPlaceBox{display:none;margin-top:9px;padding:10px;border-radius:14px;background:#f8faf9}.nearList>small{display:block;font-size:9px;color:#718078;margin-bottom:5px}.nearList .placePick{width:100%;margin-top:5px;display:flex;justify-content:space-between;align-items:center}.newPlaceBox{gap:6px}.newPlaceBox input{flex:1;min-width:0;border:1px solid #dfe5e2;border-radius:11px;padding:10px;font-size:11px}.newPlaceBox button{border:0;border-radius:11px;background:#129d76;color:#fff;padding:10px;font-size:10px;font-weight:900}.selectedPlace{display:none;margin-top:9px;border-radius:12px;background:#fff7da;padding:9px;font-size:10px;font-weight:900}.checkinBtn:disabled{background:#dfe5e2!important;color:#8a9690!important}
+</style><style>
+/* HOME 3.4 — MY: monthly meal calendar */
+.myPage{padding:4px 0 28px}.mySummary{padding:14px;border-radius:18px;background:linear-gradient(120deg,#fff6e8,#eef9f5);margin:12px 0}.mySummary h3{margin:0 0 4px;font-size:18px}.myStats{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:10px}.myStats div{background:#fff;border-radius:11px;padding:8px 3px;text-align:center}.myStats b{display:block;font-size:13px}.myStats small{font-size:8px;color:#748079}.calendarBox{border:1px solid #e7ebe8;border-radius:18px;padding:12px;background:#fff}.calHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.calHead h3{margin:0;font-size:17px}.calHead button{width:34px;height:34px;border:0;border-radius:50%;background:#f3f6f4}.week,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.week span{text-align:center;font-size:9px;color:#82908a;padding:5px}.day{min-height:47px;border:0;border-radius:12px;background:#fafbfa;position:relative;font-size:11px}.day.empty{background:transparent}.day.has{font-weight:900}.day.love{background:#fff0f1;color:#c94754}.day.ok{background:#fff8d9;color:#8c731d}.day.bad{background:#323638;color:#fff}.day.value{box-shadow:inset 0 0 0 2px #19a47a}.day .dot{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:currentColor}.day.selected{outline:2px solid #159b74;outline-offset:1px}.legendCal{display:flex;gap:9px;overflow-x:auto;margin:9px 0 0}.legendCal span{font-size:8px;white-space:nowrap}.diaryDetail{margin-top:12px;border-radius:17px;background:#f8faf9;padding:13px}.diaryDetail h3{font-size:15px;margin:0 0 8px}.mealEntry{background:#fff;border:1px solid #e7ebe8;border-radius:14px;padding:11px}.mealEntry b{font-size:14px}.mealEntry strong{display:block;font-size:11px;color:#617182;margin-top:4px}.mealEntry p{font-size:10px;line-height:1.5;color:#566861;margin:7px 0}.mealMeta{display:flex;gap:6px;flex-wrap:wrap}.mealMeta span{border-radius:999px;background:#f1f5f3;padding:5px 7px;font-size:8px}.diaryActions{display:flex;gap:6px;margin-top:9px}.diaryActions button{flex:1;border:0;border-radius:11px;background:#e9f7f2;color:#087c5b;padding:9px;font-size:9px;font-weight:900}
+</style><style>
+/* HOME 3.5 — trust and small-restaurant principles */
+.identity{margin:0 10px 10px;padding:11px 13px;border-radius:16px;background:#f3faf7;border:1px solid #e0eee8;display:flex;align-items:center;justify-content:space-between;gap:8px}.identity small{display:block;font-size:8px;color:#718078}.identity b{display:block;font-size:11px;margin-top:2px}.identity button{flex:0 0 auto;border:0;background:transparent;color:#138363;font-size:9px;font-weight:900}.principles{display:none;margin:-3px 10px 11px;padding:13px;border-radius:16px;background:#fff;border:1px solid #e7ebe8}.principles>b{font-size:13px}.principles p{font-size:9px;line-height:1.55;color:#5f7068;margin:8px 0}.principles strong{color:#25332d}.privacyNote{margin-top:9px;border-radius:11px;background:#f4f7f5;padding:8px;font-size:8px;color:#64736d}.privacyNote b{color:#168363}.discoverSmall{margin:0 10px 12px;padding:13px;border-radius:18px;background:linear-gradient(110deg,#fff8e8,#f2faf6)}.discoverSmall h3{font-size:15px;margin:2px 0 4px}.discoverSmall p{font-size:9px;color:#66766f;line-height:1.5;margin:0 0 9px}.discoverSmall button{border:0;border-radius:999px;background:#fff;color:#137d60;padding:9px 11px;font-size:9px;font-weight:900}
+@media(min-width:601px){.identity,.principles,.discoverSmall{margin-left:28px;margin-right:28px}}
+</style><style>
+/* HOME 3.6 — 기록은 풍부하게, 화면은 단순하게 */
+.level{display:none!important}
+.identity{padding:10px 12px!important;background:#f7fbf9!important}
+.identity b{font-size:10.5px!important;font-weight:800!important}
+.today{background:#fff!important;border:1px solid #e8ece9!important;padding:14px!important}
+.today h2{font-size:19px!important}
+.quick{padding-top:2px!important}
+.quick h3{font-size:15px!important;font-weight:900!important}
+.discovered h3,.local h3{font-size:15px!important}
+.discoverSmall{background:#faf9f4!important;border:1px solid #eeeae0!important}
+.discoverSmall h3{font-size:14px!important}
+.community{display:none!important}
+@media(max-width:600px){
+ .identity,.today,.quick,.discovered,.discoverSmall,.local,.mapbox{margin-left:10px!important;margin-right:10px!important}
+}
+</style><style>
+.discoverHead{display:flex;justify-content:space-between;align-items:end;margin-bottom:8px}.discoverHead small{font-size:8px;color:#77847e}.discoverHead h3{margin:2px 0 0!important}.discoverHead>button{border:0;background:transparent;color:#64756e;font-size:9px;font-weight:900}.discoverReasons{display:flex;gap:6px;overflow-x:auto;margin-bottom:8px}.discoverReasons button{flex:0 0 auto;border:1px solid #e5e9e6;border-radius:999px;background:#fff;padding:7px 9px;font-size:8px;color:#68766f}.discoverReasons .activeReason{background:#edf8f4;color:#087b5c;border-color:#d7eee6;font-weight:900}
+</style>
+<style>
+/* HOME 3.8 — calm home + interactive meal-record bottom sheet */
+.topLevel{position:relative;z-index:8;margin:-15px 12px 12px;padding:10px 12px;border:1px solid #e3e9e6;border-radius:16px;background:rgba(255,255,255,.96);box-shadow:0 4px 14px rgba(38,66,55,.07)}
+.topLevelRow{display:flex;justify-content:space-between;align-items:center}.topLevelRow b{font-size:11px}.topLevelRow strong{font-size:10px;color:#128260}.topLevelProgress{height:5px;background:#edf1ef;border-radius:99px;overflow:hidden;margin:7px 0 3px}.topLevelProgress i{display:block;width:72%;height:100%;background:#159b74;border-radius:99px}.topLevel>small{display:block;text-align:right;font-size:7.5px;color:#7d8984}
+
+.recordHero{position:relative;margin:0 10px 13px;padding:18px 16px 13px;border-radius:20px;background:linear-gradient(125deg,#f0faf5,#f7fbf5);border:1px solid #e2eee7;overflow:hidden}
+.recordCopy{position:relative;z-index:2}.recordCopy small{font-size:8px;letter-spacing:.7px;color:#84a69a}.recordCopy h2{font-size:23px;line-height:1.14;letter-spacing:-1px;color:#126c54;margin:6px 0 9px}.recordCopy p{font-size:10px;line-height:1.65;color:#40554d;margin:0 0 14px}.leafMark{position:absolute;right:24px;top:34px;font-size:48px;opacity:.16;transform:rotate(-12deg)}
+.recordBtn{position:relative;z-index:2;width:100%;border:0;border-radius:15px;background:#087f60;color:#fff;padding:13px 12px;font-size:14px;font-weight:900;box-shadow:0 4px 12px rgba(8,127,96,.16)}
+.recordHint{text-align:center;margin-top:8px;font-size:8px;color:#60716a}
+
+.recordOverlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(19,34,29,.48);align-items:flex-end;justify-content:center}
+.recordOverlay.open{display:flex}.recordSheet{width:min(100%,820px);max-height:88%;overflow:auto;background:#fff;border-radius:25px 25px 0 0;padding:8px 16px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.12)}
+.sheetHandle{width:42px;height:5px;border-radius:99px;background:#bdc6c2;margin:0 auto 10px}.sheetHead{display:flex;justify-content:space-between;align-items:center}.sheetHead h2{font-size:22px;margin:0}.sheetHead button{width:42px;height:42px;border:0;background:transparent;font-size:29px;color:#40534b}.recordSheet>h3{font-size:15px;margin:14px 0 2px}.sheetSub{font-size:10px;color:#718078;margin:0 0 11px}
+.sheetChoice{width:100%;display:grid;grid-template-columns:42px 1fr 18px;gap:8px;align-items:center;text-align:left;border:1px solid #e7ebe9;border-radius:16px;background:#fafbfa;padding:11px;margin:7px 0}.sheetChoice.primary{background:#eaf9f4;border-color:#d9efe7;color:#087b5c}.choiceIcon{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:18px;font-weight:900}.sheetChoice span:nth-child(2){min-width:0}.sheetChoice b{display:block;font-size:13px}.sheetChoice small{display:block;font-size:9px;color:#708079;margin-top:3px}.sheetChoice em{font-style:normal;font-size:22px;color:#52665e}
+.sheetDivider{border-top:1px dashed #dbe3df;margin:14px 0 10px}.sheetRecentHead{display:flex;justify-content:space-between;align-items:center}.sheetRecentHead b{font-size:13px}.sheetRecentHead button{border:0;background:transparent;color:#65776f;font-size:9px}.sheetRecent{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.recentMini{border:1px solid #e7ebe9;border-radius:14px;background:#fff;padding:0;overflow:hidden;text-align:left}.recentMini img{width:100%;height:72px;object-fit:cover}.recentMini span{display:block;padding:8px}.recentMini b{display:block;font-size:11px}.recentMini small{display:block;font-size:8px;color:#75817c;margin-top:3px}.sheetMessage{margin-top:13px;padding:13px;border-radius:15px;background:#edf9f5;text-align:center;color:#13775d;font-size:10px;line-height:1.45}
+
+@media(min-width:601px){.topLevel{max-width:764px;margin:-16px auto 12px}.recordHero{margin-left:28px;margin-right:28px}.recordSheet{border-radius:25px 25px 0 0}}
+</style>
+<style>
+/* 3.8 patch — 나의 한끼지도 글자만 확대 */
+.mealMap .mapHead b{font-size:18px!important;line-height:1.3!important}
+.mealMap .mapHead small{font-size:11px!important;line-height:1.45!important}
+.mealMap .mapHead button{font-size:12px!important}
+.mealMap .legend span{font-size:10px!important;font-weight:700!important}
+.mealMap .mapStats b{font-size:11px!important;line-height:1.3!important;padding:9px 3px!important}
+.mealMap .you{font-size:10px!important}
+@media(max-width:600px){
+ .mealMap .mapHead b{font-size:18px!important}
+ .mealMap .mapHead small{font-size:11px!important}
+ .mealMap .legend span{font-size:10px!important}
+ .mealMap .mapStats b{font-size:11px!important}
+}
+</style><style>
+/* 3.10 — local discovery readability + neighborhood search */
+.discoverHead small{
+  font-size:12px!important;
+  font-weight:900!important;
+  color:#17815f!important;
+  letter-spacing:-.1px!important;
+}
+.discoverHead h3{
+  font-size:18px!important;
+  margin-top:4px!important;
+}
+.discoverReasons{
+  gap:7px!important;
+  margin-top:9px!important;
+  margin-bottom:11px!important;
+}
+.discoverReasons button{
+  min-height:36px!important;
+  padding:9px 13px!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  color:#52665e!important;
+}
+.discoverReasons .activeReason{
+  color:#087b5c!important;
+  font-weight:900!important;
+  background:#e8f8f2!important;
+  border-color:#cfece1!important;
+}
+.localTop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.localTop small{font-size:10px!important;color:#6f7f77}
+.localTop h3{font-size:18px!important;margin:3px 0!important}
+.localTop>button{flex:0 0 auto;border:1px solid #dbe8e2;border-radius:999px;background:#fff;padding:8px 10px;font-size:10px;font-weight:900;color:#087b5c}
+.regionSearchBox{display:none;grid-template-columns:minmax(0,1fr) auto;gap:6px;margin:10px 0 4px}
+.regionSearchBox.open{display:grid}
+.regionSearchBox input{min-width:0;border:1px solid #dfe7e3;border-radius:12px;background:#fff;padding:11px;font-size:12px}
+.regionSearchBox button{border:0;border-radius:12px;background:#159b74;color:#fff;padding:0 12px;font-size:10px;font-weight:900}
+@media(max-width:600px){
+ .discoverHead small{font-size:12px!important}
+ .discoverHead h3{font-size:18px!important}
+ .discoverReasons button{font-size:11px!important}
+}
+</style><style>
+/* HOME 3.11 — real local meal records */
+.savedSummary{margin:0 10px 10px;padding:9px 11px;border-radius:14px;background:#fff9e9;border:1px solid #eee7d5;display:grid;grid-template-columns:auto auto 1fr;gap:7px;align-items:center}.savedSummary span{font-size:9px;color:#756d59}.savedSummary b{font-size:11px}.savedSummary small{text-align:right;font-size:8px;color:#7b817d}
+.mealForm{margin-top:14px;padding-top:13px;border-top:1px dashed #dce5e0}.formHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.formHead b{font-size:14px}.formHead small{font-size:8px;color:#78857f}.mealForm label{display:block;font-size:9px;font-weight:800;color:#596a62;margin-top:8px}.mealForm input:not([type=checkbox]),.mealForm select,.mealForm textarea{width:100%;margin-top:4px;border:1px solid #dfe6e2;border-radius:11px;background:#fff;padding:10px;font-size:12px;color:#26332e}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.tastePick{display:flex;gap:5px;overflow-x:auto;align-items:center;margin-top:10px}.tastePick span{font-size:9px;font-weight:800;white-space:nowrap}.tastePick button{flex:0 0 auto;border:1px solid #e3e8e5;border-radius:999px;background:#fff;padding:8px 9px;font-size:9px}.tastePick button.selected{background:#e8f8f2;border-color:#bfe7d9;color:#087b5c;font-weight:900}.valueCheck{display:flex!important;align-items:center;gap:5px}.saveMealLocal{width:100%;border:0;border-radius:13px;background:#0b8d69;color:#fff;padding:12px;font-weight:900;margin-top:12px}.saveNotice{display:none;margin-top:8px;border-radius:11px;background:#eef9f5;color:#087b5c;padding:9px;text-align:center;font-size:10px;font-weight:900}
+</style><style>
+/* HOME 3.12 — 모바일 한끼 기록 입력 가독성/터치 영역 확대 */
+.mealForm{padding-top:17px!important}
+.formHead{margin-bottom:13px!important}
+.formHead b{font-size:19px!important;line-height:1.3!important}
+.formHead small{font-size:11px!important;line-height:1.4!important}
+
+.mealForm label{
+  font-size:14px!important;
+  line-height:1.35!important;
+  margin-top:14px!important;
+}
+.mealForm input:not([type=checkbox]),
+.mealForm select,
+.mealForm textarea{
+  min-height:54px!important;
+  margin-top:7px!important;
+  border-radius:14px!important;
+  padding:13px 15px!important;
+  font-size:16px!important;
+  line-height:1.35!important;
+}
+.mealForm textarea{min-height:90px!important}
+.formGrid{gap:10px!important}
+
+.tastePick{
+  display:grid!important;
+  grid-template-columns:1fr 1fr 1fr!important;
+  gap:8px!important;
+  margin-top:16px!important;
+  overflow:visible!important;
+}
+.tastePick>span{
+  grid-column:1/-1!important;
+  font-size:14px!important;
+  font-weight:900!important;
+}
+.tastePick button{
+  min-height:48px!important;
+  padding:10px 6px!important;
+  border-radius:14px!important;
+  font-size:13px!important;
+  font-weight:800!important;
+  white-space:nowrap!important;
+}
+
+.valueCheck{
+  min-height:50px!important;
+  font-size:14px!important;
+  gap:9px!important;
+  padding:8px 3px!important;
+  cursor:pointer!important;
+}
+.valueCheck input[type=checkbox]{
+  width:25px!important;
+  height:25px!important;
+  flex:0 0 25px!important;
+}
+.saveMealLocal{
+  min-height:55px!important;
+  border-radius:15px!important;
+  padding:14px!important;
+  font-size:16px!important;
+  margin-top:14px!important;
+}
+.saveNotice{font-size:13px!important;padding:11px!important}
+
+@media(max-width:600px){
+ .recordSheet{padding-left:15px!important;padding-right:15px!important}
+ .formGrid{grid-template-columns:1fr 1fr!important}
+ .mealForm input:not([type=checkbox]),.mealForm select,.mealForm textarea{font-size:16px!important}
+}
+</style><style>
+/* HOME 3.13 — private photo diary */
+.photoDiary{margin-top:16px;padding:13px;border-radius:16px;background:#f7faf8;border:1px solid #e2e9e5}
+.photoHead{display:flex;justify-content:space-between;align-items:center;gap:8px}.photoHead>div{display:flex;align-items:baseline;gap:6px}.photoHead b{font-size:14px}.photoHead small{font-size:9px;color:#7c8983}.photoHead>span{font-size:9px;color:#168060;font-weight:800}
+.photoDiary p{font-size:10px;line-height:1.45;color:#687870;margin:7px 0 10px}
+.photoActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.photoAction{display:flex!important;align-items:center;justify-content:center;min-height:49px!important;margin:0!important;border:1px solid #dce6e1;border-radius:13px;background:#fff;color:#29463b!important;font-size:12px!important;font-weight:900!important;cursor:pointer}.photoAction input{display:none}
+.photoPreview{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px}.photoThumb{position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#edf2ef}.photoThumb img{width:100%;height:100%;object-fit:cover}.photoThumb button{position:absolute;right:5px;top:5px;width:25px;height:25px;border:0;border-radius:50%;background:rgba(20,30,26,.72);color:#fff;font-size:15px;line-height:25px}
+.photoCount{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;border:1px dashed #cfdcd6;border-radius:12px;color:#668078;font-size:10px;background:#fff}
+</style><style>
+/* HOME 3.14 — saved local records appear in MY calendar */
+.savedMealPhoto{width:100%;max-height:190px;object-fit:cover;border-radius:12px;margin:8px 0}
+.savedPhotoStrip{display:flex;gap:6px;overflow-x:auto;margin:8px 0}.savedPhotoStrip img{width:76px;height:76px;object-fit:cover;border-radius:10px;flex:0 0 auto}
+.savedBadge{display:inline-block;border-radius:999px;background:#eef6f2;padding:5px 7px;font-size:9px;margin:3px 3px 0 0}
+.noMeal{color:#77847e;font-size:11px}
+</style><style>
+/* HOME 3.15 — new place location flow */
+.newPlacePanel{display:none;margin-top:11px;padding:13px;border-radius:17px;background:#f7fbf9;border:1px solid #dfeae5}.newPlacePanel.open{display:block}.newPlaceHead{display:flex;justify-content:space-between;align-items:center}.newPlaceHead b{font-size:15px;color:#13775d}.newPlaceHead button{width:34px;height:34px;border:0;background:transparent;font-size:22px}.newPlacePanel>p{font-size:10px;color:#66766f;line-height:1.45;margin:5px 0 10px}.newPlacePanel label{display:block;font-size:11px;font-weight:900}.newPlacePanel label input{width:100%;min-height:48px;margin-top:5px;border:1px solid #dce5e1;border-radius:12px;background:#fff;padding:11px;font-size:15px}.whereTitle{display:block;font-size:12px;margin:13px 0 7px}.locationWays{display:grid;grid-template-columns:1fr;gap:7px}.locationWays button{display:grid;grid-template-columns:30px 1fr;text-align:left;align-items:center;border:1px solid #e1e8e4;border-radius:13px;background:#fff;padding:10px}.locationWays button>b{font-size:12px}.locationWays button>small{grid-column:2;font-size:9px;color:#718078;margin-top:2px}.locationWays button.selected{border-color:#98d6c0;background:#ecfaf5}.addressBox{display:none;grid-template-columns:1fr auto;gap:6px;margin-top:8px}.addressBox.open{display:grid}.addressBox input{min-width:0;border:1px solid #dce5e1;border-radius:11px;padding:10px;font-size:13px}.addressBox button{border:0;border-radius:11px;background:#159b74;color:#fff;padding:0 12px;font-weight:900}.locationStatus{display:none;margin-top:8px;border-radius:11px;background:#fff8dc;padding:9px;font-size:10px;color:#675d39}.confirmDiscovery{width:100%;min-height:49px;margin-top:10px;border:0;border-radius:13px;background:#0c8d69;color:#fff;font-size:13px;font-weight:900}.confirmDiscovery:disabled{background:#dce4e0;color:#8b9791}.trustNote{display:block!important;font-size:8px!important;color:#6c7d75!important;line-height:1.45;margin-top:8px}
+</style><style>
+.mapFilterRow{display:flex;gap:6px;overflow-x:auto;margin:9px 0 7px}.mapFilter{flex:0 0 auto;border:1px solid #dfe7e3;border-radius:999px;background:#fff;padding:7px 9px;font-size:9px;font-weight:800;color:#61726a}.mapFilter.active{background:#e8f8f2;color:#087b5c;border-color:#cceadd}.livePin{position:absolute;width:34px;height:34px;border:3px solid #fff;border-radius:50% 50% 50% 6px;transform:translate(-50%,-100%) rotate(-45deg);box-shadow:0 3px 8px rgba(40,60,52,.22);display:grid;place-items:center;font-size:14px;z-index:5}.livePin span{transform:rotate(45deg)}.livePin.love{background:#ee6570}.livePin.ok{background:#efc94f}.livePin.bad{background:#4a4d50;color:#fff}.livePin.value{box-shadow:0 0 0 3px #18a379,0 3px 8px rgba(40,60,52,.22)}.mapEmpty{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:78%;text-align:center;font-size:10px;line-height:1.5;color:#687a72;z-index:4}.pinPopup{display:none;margin-top:8px;border-radius:13px;background:#fff;border:1px solid #e2e9e5;padding:10px}.pinPopup.open{display:block}.pinPopup b{display:block;font-size:13px}.pinPopup span{display:block;font-size:9px;color:#697971;margin-top:3px}.pinPopup small{display:block;font-size:9px;margin-top:5px}.mapNotice{font-size:8px;color:#78857f;line-height:1.4;margin-top:7px}
+</style><script src="config.js"></script>
+<script>
+(function(){
+ const key=(window.APP_CONFIG&&window.APP_CONFIG.KAKAO_JS_KEY)||"";
+ if(!key || key.indexOf("__")===0) return;
+ const sc=document.createElement("script");
+ sc.src="https://dapi.kakao.com/v2/maps/sdk.js?appkey="+encodeURIComponent(key)+"&libraries=services&autoload=false";
+ sc.async=true; document.head.appendChild(sc);
+ window.__hankkiKakaoScript=sc;
+})();
+</script><style>
+/* HOME 3.18 — actual Kakao Map container */
+.kakaoMapCanvas{height:230px!important;background:#eef4f0!important;position:relative!important}
+.kakaoMealMap{position:absolute;inset:0;border-radius:16px;overflow:hidden}
+.mapFallback{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;font-size:11px;line-height:1.5;color:#687a72;background:#eef4f0;border-radius:16px;z-index:2}
+.mapFallback.hidden{display:none}
+.kakaoPin{width:34px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:18px 18px 18px 4px;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 3px 8px rgba(35,55,47,.24);font-size:14px;font-weight:900}
+.kakaoPin span{transform:rotate(45deg)}.kakaoPin.love{background:#ee6570;color:#fff}.kakaoPin.ok{background:#efc94f;color:#554815}.kakaoPin.bad{background:#4a4d50;color:#fff}.kakaoPin.value{box-shadow:0 0 0 3px #18a379,0 3px 8px rgba(35,55,47,.24)}
+.mapSetupNote{font-size:9px;line-height:1.45;color:#6f7e77;margin-top:7px}
+</style><style>
+/* HOME 3.20 — 식당 하나 = 핀 하나, 방문 기록 누적 */
+.pinPopup{padding:13px!important}
+.pinPopup .placePopupTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.pinPopup .placePopupTop b{font-size:16px!important}
+.pinPopup .visitCount{flex:0 0 auto;border-radius:999px;background:#eaf8f3;padding:6px 9px;font-size:10px;font-weight:900;color:#087b5c}
+.pinPopup .recentMeal{margin-top:8px;padding:9px;border-radius:11px;background:#f7faf8}
+.pinPopup .recentMeal strong{display:block;font-size:12px}
+.pinPopup .recentMeal small{font-size:10px!important;line-height:1.45}
+.pinPopup .popupPhotos{display:flex;gap:6px;overflow-x:auto;margin-top:8px}
+.pinPopup .popupPhotos img{width:66px;height:66px;object-fit:cover;border-radius:10px;flex:0 0 auto}
+.pinPopup .historyBtn{width:100%;min-height:42px;margin-top:9px;border:0;border-radius:11px;background:#0c8d69;color:#fff;font-size:11px;font-weight:900}
+.placeHistory{display:none;margin-top:9px;border-top:1px dashed #dce5e0;padding-top:8px}
+.placeHistory.open{display:block}
+.historyItem{padding:9px 0;border-bottom:1px solid #eef1ef}
+.historyItem:last-child{border-bottom:0}
+.historyItem b{font-size:11px!important}
+.historyItem span{font-size:9px!important;color:#687870}
+.historyItem p{font-size:9px;line-height:1.45;margin:4px 0 0;color:#53665d}
+</style><style>
+/* HOME 3.22 — safe save + refined map pins */
+.saveSuccess{display:none;position:fixed;inset:0;z-index:2300;background:rgba(22,38,32,.46);align-items:center;justify-content:center;padding:20px}.saveSuccess.open{display:flex}.saveSuccessCard{width:min(92vw,390px);border-radius:24px;background:#fff;padding:24px 20px 18px;text-align:center;box-shadow:0 18px 50px rgba(20,40,32,.18)}.successCheck{width:60px;height:60px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:#159b74;color:#fff;font-size:33px;font-weight:900}.saveSuccessCard h2{font-size:20px;margin:0}.saveSuccessCard p{font-size:12px;color:#66776f;line-height:1.5}.successChips{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}.successChips span{background:#eff8f4;border-radius:999px;padding:7px 9px;font-size:10px;font-weight:800}.saveSuccessCard>button,.duplicateActions button{min-height:49px;border:0;border-radius:13px;font-size:13px;font-weight:900}.saveSuccessCard>button{width:100%;margin-top:16px;background:#0b8d69;color:#fff}.duplicateActions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:15px}.duplicateActions button:first-child{background:#edf3f0;color:#42584f}.duplicateActions button:last-child{background:#0b8d69;color:#fff}.saveMealLocal:disabled{background:#aab8b2!important;color:#fff!important}
+
+/* smaller, cleaner map marker */
+.kakaoPin{position:relative!important;width:26px!important;height:32px!important;border-radius:14px 14px 14px 4px!important;border:2px solid #fff!important;box-shadow:0 2px 6px rgba(30,48,40,.22)!important;font-size:11px!important}
+.kakaoPin.love{background:#ef6973!important}.kakaoPin.ok{background:#f2c84e!important}.kakaoPin.bad{background:#50565a!important}
+.kakaoPin.value{box-shadow:0 2px 6px rgba(30,48,40,.22)!important}
+.kakaoPin .crownBadge{position:absolute;right:-9px;top:-9px;transform:rotate(45deg);width:17px;height:17px;border-radius:50%;display:grid;place-items:center;background:#fff7d6;border:1px solid #ead58d;font-size:9px}
+.kakaoPin .visitBadgePin{position:absolute;left:-10px;bottom:-8px;transform:rotate(45deg);min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#fff;color:#16785e;border:1px solid #cfe5dc;font-size:8px;line-height:15px;text-align:center;font-weight:900}
+
+/* delete from personal history */
+.deleteMealBtn{border:1px solid #efd9d9!important;background:#fff5f5!important;color:#b84d55!important;padding:7px 9px!important;border-radius:9px!important;font-size:9px!important;font-weight:900!important;margin-top:6px}
+</style><style>
+/* HOME 3.23 — 한끼발견 하트형 지도 핀 */
+.kakaoPin{
+ position:relative!important;width:38px!important;height:38px!important;
+ border:3px solid #fff!important;border-radius:50% 50% 50% 6px!important;
+ transform:rotate(-45deg)!important;box-shadow:0 4px 10px rgba(35,55,47,.22)!important;
+ display:grid!important;place-items:center!important;
+}
+.kakaoPin>span{transform:rotate(45deg)!important;font-size:15px!important;color:#fff!important}
+.kakaoPin.love{background:#f45d6d!important}.kakaoPin.ok{background:#f1ad18!important}.kakaoPin.bad{background:#69747d!important}
+.kakaoPin .crownBadge{
+ position:absolute!important;right:-10px!important;top:-10px!important;
+ transform:rotate(45deg)!important;width:20px!important;height:20px!important;
+ border-radius:50%!important;background:#fff4bf!important;border:1px solid #e4c95e!important;
+ display:grid!important;place-items:center!important;font-size:10px!important;font-style:normal!important
+}
+.kakaoPin .visitBadgePin{
+ position:absolute!important;right:-14px!important;bottom:-8px!important;left:auto!important;
+ transform:rotate(45deg)!important;min-width:21px!important;height:21px!important;
+ padding:0 5px!important;border-radius:11px!important;background:#fff!important;
+ border:2px solid currentColor!important;color:#159b74!important;font-size:9px!important;
+ line-height:17px!important;text-align:center!important;font-style:normal!important
+}
+.pinPopup{border-radius:18px!important;padding:12px!important;background:#fff!important;box-shadow:0 5px 18px rgba(30,50,42,.08)}
+.placePopupTop{align-items:center!important}.placePopupTop b{font-size:17px!important}
+.visitCount{font-size:11px!important;padding:7px 10px!important}
+.popupHero{display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:center;margin-top:10px}
+.popupHero img{width:86px;height:86px;object-fit:cover;border-radius:13px}
+.popupHero.noPhoto{grid-template-columns:1fr}
+.popupTags{font-size:10px;color:#52675e;line-height:1.6}
+.recentMeal{margin-top:8px!important}
+.historyBtn{min-height:45px!important;font-size:12px!important}
+</style><style>
+/* HOME 3.24 — 기록을 누르면 수정/삭제 */
+.mealEntry,.historyItem{cursor:pointer;position:relative}
+.mealEntry:after,.historyItem:after{content:"⋯";position:absolute;right:10px;top:9px;color:#73817b;font-size:18px;font-weight:900}
+.manageCard{text-align:left!important}.manageCard h2{font-size:19px}.manageCard>p{font-size:12px!important;background:#f6f9f7;border-radius:12px;padding:10px}
+.manageActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.manageActions button{min-height:50px;border-radius:13px;font-size:13px;font-weight:900}.manageActions button:first-child{border:0;background:#e9f8f2;color:#087b5c}.manageActions button:last-child{border:1px solid #f0d5d7;background:#fff4f4;color:#b74b55}.manageClose{background:#eef2f0!important;color:#506159!important;margin-top:8px!important}
+.editingBanner{display:none;margin:9px 0;border-radius:11px;background:#fff5d7;padding:9px;font-size:11px;font-weight:900;color:#745f20}.editingBanner.open{display:block}
+</style><style>
+/* HOME 3.25 — 실제 수정/삭제 버튼을 기록 카드에 표시 */
+.mealEntry:after,.historyItem:after{display:none!important;content:none!important}
+.recordActionRow{display:flex;gap:7px;margin-top:9px}
+.recordActionRow button{flex:1;min-height:42px;border-radius:11px;font-size:11px;font-weight:900}
+.recordEditBtn{border:0;background:#e9f8f2;color:#087b5c}
+.recordDeleteBtn{border:1px solid #f0d5d7;background:#fff5f5;color:#b74b55}
+.historyItem .recordActionRow button{min-height:36px;font-size:9px}
+</style><style>
+/* HOME 3.27 — restaurant detail */
+.restaurantDetail{padding:0 0 90px}.detailHero{height:230px;border-radius:0 0 22px 22px;overflow:hidden;background:#edf3ef}.detailHero img{width:100%;height:100%;object-fit:cover}.detailMain{padding:15px}.detailTitleRow{display:flex;justify-content:space-between;gap:10px;align-items:start}.detailTitleRow h2{font-size:24px;margin:0}.detailTitleRow button{border:1px solid #dfe7e3;border-radius:999px;background:#fff;padding:9px 11px;font-size:11px}.detailBadges{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.detailBadges span{border-radius:999px;background:#eef8f4;padding:6px 8px;font-size:10px;font-weight:800;color:#26705a}.detailInfo{margin-top:12px;border-top:1px solid #edf0ee}.detailInfo div{display:grid;grid-template-columns:64px 1fr;gap:8px;padding:10px 0;border-bottom:1px solid #f0f2f1;font-size:12px}.detailInfo b{color:#607169}.detailSection{margin-top:18px}.detailSection h3{font-size:17px;margin:0 0 9px}.menuList{display:grid;gap:7px}.menuRow{display:flex;justify-content:space-between;border-radius:13px;background:#f8faf9;padding:11px;font-size:12px}.menuRow strong{font-size:13px}.verifyBox{border-radius:15px;background:#fff8df;padding:12px;font-size:11px;line-height:1.55}.myPlaceBox{border-radius:16px;background:#eef9f5;padding:13px}.myPlaceBox b{font-size:16px}.myPlaceBox p{font-size:11px;color:#607169;line-height:1.5}.myPlaceBox button{width:100%;border:0;border-radius:12px;background:#fff;color:#087b5c;padding:10px;font-weight:900}.detailBottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,760px);display:grid;grid-template-columns:110px 1fr;gap:8px;background:#fff;padding:9px 12px calc(9px + env(safe-area-inset-bottom));border-top:1px solid #e7ece9;z-index:550}.detailBottom button{min-height:50px;border-radius:14px;font-weight:900}.detailBottom .wish{border:1px solid #dfe7e3;background:#fff;color:#52665e}.detailBottom .recordHere{border:0;background:#0b8d69;color:#fff}
+</style><style>
+/* HOME 3.28 — 상세페이지 대표사진 과도한 확대 방지 */
+.detailHero{
+  height:auto!important;
+  aspect-ratio:16/10!important;
+  background:#f3f5f3!important;
+  border-radius:0 0 22px 22px!important;
+}
+.detailHero img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#f3f5f3!important;
+}
+@media(max-width:600px){
+ .detailHero{aspect-ratio:16/10!important}
+}
+</style><style>
+/* HOME 3.29 — 실제 찜 토글 */
+.detailTitleRow button,.detailBottom .wish{transition:.15s ease}
+.detailTitleRow button.favorited,.detailBottom .wish.favorited{
+ background:#fff0f2!important;color:#e84f61!important;border-color:#f4bcc4!important;
+}
+.detailTitleRow button.favorited{font-weight:900}
+</style></head><body>
+<main class="app"><header class="hero"><button class="location" data-page="위치 설정">📍 부산 기장군 일광읍⌄</button><div class="actions"><button data-page="검색">⌕</button><button data-page="알림">♢</button><button data-page="마이">○</button></div></header>
+<section class="topLevel" data-page="마이">
+  <div class="topLevelRow"><b>🌱 동네 발견자 Lv.3</b><strong>720점</strong></div>
+  <div class="topLevelProgress"><i></i></div>
+  <small>다음 레벨까지 80점 ›</small>
+</section>
+
+<section class="savedSummary" data-page="마이"><span>이번 달 나의 한끼</span><b id="savedCount">0끼 기록</b><small>달력과 한끼지도에서 다시 볼 수 있어요 ›</small></section><div class="search"><input placeholder="지역, 식당명, 메뉴로 검색"><button data-page="검색">검색</button></div>
+<section class="recordHero">
+  <div class="recordCopy">
+    <small>GOOD MEAL, BETTER PLACE</small>
+    <h2>오늘의 한 끼를<br>남겨보세요</h2>
+    <p>오늘 어디에서, 무엇을 드셨나요?<br>기록은 나에게 추억으로 남고,<br>좋은 정보는 우리 동네에 도움이 돼요.</p>
+  </div>
+  <div class="leafMark" aria-hidden="true">🌿</div>
+  <button id="openRecordSheet" class="recordBtn">＋ 오늘 한끼 기록하기</button>
+  <div class="recordHint">◷ 처음이세요? 10초면 첫 기록을 남길 수 있어요!</div>
+</section>
+<section class="level"><div class="levelTop"><b>🌱 동네 발견자 Lv.3</b><span>발견점수 720</span></div><div class="bar"><i></i></div></section>
+<section class="quick"><h3>지금 뭐 먹지?</h3><div class="quickRow"><button data-page="내 주변">내 주변</button><button data-page="킹성비">👑 킹성비</button><button data-page="혼밥">혼밥</button><button data-page="아이와">아이와</button><button data-page="AI 한끼">◉ AI 한끼</button></div></section>
+<section class="discovered"><div class="discoverHead"><div><small>우리 동네 발견</small><h3>동네 사람들이 다시 찾은 곳</h3></div><button data-page="동네 발견">더보기 ›</button></div>
+<div class="discoverReasons"><button class="activeReason">다시 찾는 곳</button><button>점심 단골</button><button>아이와</button></div><div class="cards"><article class="card" data-page="일광돼지국밥"><img src="assets/food1.webp"><div class="cardBody"><b>일광돼지국밥</b><strong>6,500원</strong><small>가격정보 오늘 확인</small></div></article><article class="card" data-page="바다향 파스타"><img src="assets/food2.webp"><div class="cardBody"><b>바다향 파스타</b><strong>9,000원</strong><small>킹성비 발견</small></div></article><article class="card" data-page="카페 모먼트"><img src="assets/food3.webp"><div class="cardBody"><b>카페 모먼트</b><strong>3,500원</strong><small>새로 발견된 카페</small></div></article></div></section>
+<section class="local">
+<div class="localTop"><div><small id="localRegion">부산 기장군 일광읍</small><h3>이 동네 뭐 먹지?</h3></div><button id="openRegionSearch">동네 검색 🔎</button></div>
+<div id="regionSearchBox" class="regionSearchBox"><input id="regionInput" placeholder="예: 기장, 해운대, 전주 한옥마을"><button id="applyRegion">찾아보기</button></div><div class="localRow"><button data-page="로컬 간식">로컬 간식</button><button data-page="지역 특산물">지역 특산물</button><button data-page="시장 먹거리">시장 먹거리</button></div></section>
+<section class="mealMap"><div class="mapHead"><div><b>🗺️ 나의 한끼지도</b><small>내가 먹은 곳과 취향이 쌓여요.</small></div><button data-page="나의 한끼지도">전체 지도 ›</button></div>
+<div class="mapFilterRow"><button class="mapFilter active" data-map-filter="all">전체</button><button class="mapFilter" data-map-filter="love">❤️ 인생맛집</button><button class="mapFilter" data-map-filter="value">👑 가성비</button><button class="mapFilter" data-map-filter="bad">👎 아쉬움</button></div><div class="mapCanvas kakaoMapCanvas" id="liveMealMap"><div id="kakaoMealMap" class="kakaoMealMap"></div><div id="mapFallback" class="mapFallback">카카오 지도를 불러오는 중이에요…</div></div><div id="pinPopup" class="pinPopup"></div><div class="mapNotice">주소만 저장한 기록은 실제 지도 연결 후 정확한 위치에 표시돼요. GPS로 저장한 새 식당은 현재 위치 기준으로 핀이 생성됩니다.</div>
+<div class="legend"><span>❤️ 인생맛집</span><span>👑 가성비</span><span>🙂 괜찮음</span><span>👎 아쉬움</span></div>
+<div class="mapStats"><b>방문 48곳</b><b>❤️ 9곳</b><b>👑 14곳</b><b>⭐ 단골 4곳</b></div></section></main>
+
+<div id="recordOverlay" class="recordOverlay" aria-hidden="true">
+  <section class="recordSheet" role="dialog" aria-modal="true" aria-labelledby="recordSheetTitle">
+    <div class="sheetHandle"></div>
+    <div class="sheetHead"><h2 id="recordSheetTitle">오늘 한끼 기록하기</h2><button id="closeRecordSheet" aria-label="닫기">×</button></div>
+    <h3>어디에서 드셨어요?</h3>
+    <p class="sheetSub">기록할 방법을 선택해주세요.</p>
+
+    <button class="sheetChoice primary" data-sheet-action="near">
+      <span class="choiceIcon">●</span><span><b>내 주변 식당 찾기</b><small>현재 위치 기준으로 주변 식당을 찾아볼게요.</small></span><em>›</em>
+    </button>
+    <button class="sheetChoice" data-sheet-action="recent">
+      <span class="choiceIcon">◷</span><span><b>최근 방문한 식당</b><small>최근에 방문한 식당에서 선택할 수 있어요.</small></span><em>›</em>
+    </button>
+    <button class="sheetChoice" data-sheet-action="new">
+      <span class="choiceIcon">＋</span><span><b>새로운 식당 발견하기</b><small>지도에 없는 숨은 식당도 기록할 수 있어요.</small></span><em>›</em>
+    </button>
+
+    <div id="newPlacePanel" class="newPlacePanel">
+  <div class="newPlaceHead"><b>🌱 새로운 식당 발견</b><button id="closeNewPlace" type="button">×</button></div>
+  <p>지도에 없는 식당도 내 한끼 기록에 남길 수 있어요.</p>
+  <label>식당 이름<input id="discoveryName" placeholder="식당 이름"></label>
+  <b class="whereTitle">어디에 있나요?</b>
+  <div class="locationWays">
+    <button id="useCurrentLocation" type="button">📍 <b>현재 위치로 등록</b><small>지금 식당에 있다면 가장 쉬워요.</small></button>
+    <button id="useAddress" type="button">🔎 <b>주소 직접 입력</b><small>나중에 기록할 때 사용해요.</small></button>
+    <button id="useMapPoint" type="button">🗺️ <b>지도에서 위치 선택</b><small>핀 위치를 직접 지정해요.</small></button>
+  </div>
+  <div id="addressBox" class="addressBox"><input id="discoveryAddress" placeholder="예: 부산 기장군 일광읍 ..."><button id="confirmAddress" type="button">확인</button></div>
+  <div id="locationStatus" class="locationStatus"></div>
+  <button id="confirmDiscovery" class="confirmDiscovery" type="button" disabled>이 식당으로 한끼 기록하기</button>
+  <small class="trustNote">🔒 내 한끼지도에는 바로 기록할 수 있고, 공개 동네 정보는 현장 확인 후 반영돼요.</small>
+</div><div class="sheetDivider"></div>
+    <div class="sheetRecentHead"><b>최근 방문한 식당</b><button type="button">더보기 ›</button></div>
+    <div class="sheetRecent">
+      <button class="recentMini"><img src="assets/food1.webp" alt=""><span><b>일광돼지국밥</b><small>최근 7회 방문 · 180m</small></span></button>
+      <button class="recentMini"><img src="assets/food2.webp" alt=""><span><b>바다향 파스타</b><small>최근 2회 방문 · 420m</small></span></button>
+    </div>
+    <div class="sheetMessage">💡 <b>좋은 한 끼가<br>좋은 동네를 만들어요 :)</b></div><div id="mealForm" class="mealForm">
+  <div class="formHead"><b>한끼 기록</b><small>개인 기록은 이 기기에 저장돼요.</small></div><div id="editingBanner" class="editingBanner">✏️ 기존 한끼 기록을 수정하고 있어요.</div>
+  <label>식당<input id="mealPlace" placeholder="식당 이름"></label>
+  <label>먹은 메뉴<input id="mealMenu" placeholder="예: 돼지국밥"></label>
+  <div class="formGrid"><label>가격<input id="mealPrice" inputmode="numeric" placeholder="8000"></label><label>누구와<select id="mealWith"><option>혼자</option><option>가족</option><option>친구</option><option>동료</option><option>연인</option><option>기타</option></select></label></div>
+  <div class="tastePick"><span>어땠어요?</span><button type="button" data-taste="love">❤️ 인생맛집</button><button type="button" data-taste="ok">🙂 괜찮아요</button><button type="button" data-taste="bad">👎 아쉬워요</button></div>
+  <label>오늘의 한 줄<textarea id="mealMemo" rows="2" placeholder="기분이나 있었던 일을 짧게 남겨보세요."></textarea></label>
+<div class="photoDiary">
+  <div class="photoHead"><div><b>오늘의 사진</b><small>선택 · 최대 5장</small></div><span>🔒 나만 보는 기록</span></div>
+  <p>음식, 함께한 사람, 식당 분위기 등 오늘을 기억할 사진을 남겨보세요.</p>
+  <div class="photoActions">
+    <label class="photoAction">📷 사진 찍기<input id="cameraInput" type="file" accept="image/*" capture="environment"></label>
+    <label class="photoAction">🖼️ 앨범에서 선택<input id="albumInput" type="file" accept="image/*" multiple></label>
+  </div>
+  <div id="photoPreview" class="photoPreview"></div>
+</div>
+  <label class="valueCheck"><input id="mealValue" type="checkbox"> 👑 가성비 굿</label>
+  <button id="saveMealLocal" class="saveMealLocal">오늘 한끼 저장하기</button>
+  <div id="saveNotice" class="saveNotice"></div>
+<div id="saveSuccess" class="saveSuccess"><div class="saveSuccessCard"><div class="successCheck">✓</div><h2>오늘의 한끼가 저장됐어요!</h2><p id="successPlace"></p><div class="successChips"><span>📅 한끼달력</span><span>🗺️ 한끼지도</span><span>🌱 +8점</span></div><button id="successClose" type="button">확인하고 홈으로</button></div></div>
+<div id="recordManageModal" class="saveSuccess">
+ <div class="saveSuccessCard manageCard">
+   <h2>한끼 기록 관리</h2><p id="manageSummary"></p>
+   <div class="manageActions"><button id="editRecordBtn" type="button">✏️ 기록 수정</button><button id="deleteRecordBtn" type="button">🗑️ 기록 삭제</button></div>
+   <button id="closeManageBtn" class="manageClose" type="button">닫기</button>
+ </div>
+</div>
+<div id="duplicateModal" class="saveSuccess"><div class="saveSuccessCard duplicateCard"><h2>비슷한 기록이 이미 있어요</h2><p id="duplicateText"></p><div class="duplicateActions"><button id="cancelDuplicate" type="button">기존 기록 보기</button><button id="forceDuplicate" type="button">그래도 새로 저장</button></div></div></div>
+</div>
+  </section>
+</div>
+<nav class="nav"><button class="active"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10h-6v-7H9v7H3z"/></svg>홈</button><button data-page="현장발견"><svg viewBox="0 0 24 24"><path d="M7 7 8.5 5h7L17 7h3a2 2 0 0 1 2 2v10H2V9a2 2 0 0 1 2-2z"/><circle cx="12" cy="13" r="4" fill="white"/></svg>현장발견</button><button data-page="찜"><svg viewBox="0 0 24 24"><path d="M12 21S4 16.5 4 10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11z"/></svg>찜</button><button data-page="마이"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.5-5 3-7 8-7s7.5 2 8 7z"/></svg>마이</button></nav>
+<section id="screen" class="screen"><div class="inner"><header class="head"><button id="back" class="back"><svg viewBox="0 0 24 24"><path d="M15.5 5.5 9 12l6.5 6.5"/></svg></button><h2 id="title"></h2></header><div id="body"></div></div></section>
+<section id="onboard" class="onboard"><div class="phone"><div class="slide active"><img src="onboarding_1.webp"></div><div class="slide"><img src="onboarding_2.webp"></div><div class="slide"><img src="onboarding_3.webp"></div><button id="skip" class="skip"></button><button id="next" class="next"></button></div></section>
+<script>
+(function(){
+ const S=document.getElementById("screen"),T=document.getElementById("title"),B=document.getElementById("body");
+ function close(){if(S)S.style.display="none"}
+ function open(n){if(!S||!T||!B)return;T.textContent=n;B.innerHTML='<p>'+n+' 화면으로 정상 이동했습니다.</p>';S.style.display="block"}
+ const back=document.getElementById("back");if(back)back.onclick=close;
+ document.querySelectorAll("[data-page]").forEach(x=>x.addEventListener("click",()=>open(x.dataset.page)));
+ const ob=document.getElementById("onboard"),sl=[...document.querySelectorAll(".slide")],skip=document.getElementById("skip"),next=document.getElementById("next");
+ let i=0;function paint(){sl.forEach((x,n)=>x.classList.toggle("active",n===i))}
+ if(skip&&ob)skip.onclick=()=>ob.style.display="none";
+ if(next&&ob)next.onclick=()=>{if(i<sl.length-1){i++;paint()}else ob.style.display="none"};
+ paint();
+})();
+</script>
+<script>
+(function(){
+ const openBtn=document.getElementById("openRecordSheet");
+ const overlay=document.getElementById("recordOverlay");
+ const closeBtn=document.getElementById("closeRecordSheet");
+ if(!openBtn||!overlay||!closeBtn)return;
+ function openSheet(){overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
+ function closeSheet(){overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true");document.body.style.overflow=""}
+ openBtn.addEventListener("click",openSheet);
+ closeBtn.addEventListener("click",closeSheet);
+ overlay.addEventListener("click",function(e){if(e.target===overlay)closeSheet()});
+ document.querySelectorAll("[data-sheet-action]").forEach(function(btn){
+   btn.addEventListener("click",function(){
+     const action=btn.dataset.sheetAction;
+     if(action==="recent"){
+       document.querySelector(".sheetRecent").scrollIntoView({behavior:"smooth",block:"center"});
+     }else if(action==="new"){
+       const panel=document.getElementById("newPlacePanel");
+       if(panel){
+         panel.classList.add("open");
+         setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"center"}),30);
+       }
+     }else{
+       const first=document.querySelector(".recentMini");
+       if(first) first.focus();
+     }
+   });
+ });
+})();
+</script>
+<script>
+(function(){
+ const tabs=[...document.querySelectorAll(".discoverReasons button")];
+ tabs.forEach(b=>b.addEventListener("click",function(){
+   tabs.forEach(x=>x.classList.remove("activeReason"));b.classList.add("activeReason");
+ }));
+ const open=document.getElementById("openRegionSearch"),box=document.getElementById("regionSearchBox"),input=document.getElementById("regionInput"),apply=document.getElementById("applyRegion"),label=document.getElementById("localRegion");
+ if(open&&box)open.addEventListener("click",()=>box.classList.toggle("open"));
+ if(apply&&input&&label)apply.addEventListener("click",function(){
+   const v=input.value.trim(); if(!v)return;
+   label.textContent=v; box.classList.remove("open");
+ });
+})();
+</script><script>
+(function(){
+ const KEY="hankki_meals_v1"; let taste="ok",saving=false,pending=null;
+ function get(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
+ function put(a){localStorage.setItem(KEY,JSON.stringify(a.slice(0,500)))}
+ function refresh(){const a=get(),el=document.getElementById("savedCount");if(el)el.textContent=a.length+"끼 기록"}
+ document.querySelectorAll(".tastePick [data-taste]").forEach(b=>b.addEventListener("click",function(){taste=b.dataset.taste;document.querySelectorAll(".tastePick [data-taste]").forEach(x=>x.classList.remove("selected"));b.classList.add("selected")}));
+ function build(){return {id:Date.now(),date:new Date().toISOString(),place:document.getElementById("mealPlace").value.trim(),menu:document.getElementById("mealMenu").value.trim(),price:document.getElementById("mealPrice").value.trim(),withWho:document.getElementById("mealWith").value,taste,memo:document.getElementById("mealMemo").value.trim(),value:document.getElementById("mealValue").checked,photos:[...(window.hankkiPhotos||[])],location:(window.hankkiPendingLocation||null)}}
+ function isDup(r,x){const a=new Date(r.date),b=new Date(x.date);return a.toDateString()===b.toDateString()&&r.place===x.place&&r.menu===x.menu&&String(r.price)===String(x.price)}
+ function commit(rec){
+   if(saving)return;saving=true;
+   const save=document.getElementById("saveMealLocal");save.disabled=true;save.textContent="저장 중…";
+   let a=get();
+   if(window.hankkiEditingId){
+     const oldId=window.hankkiEditingId;rec.id=oldId;
+     const old=a.find(x=>String(x.id)===String(oldId));if(old)rec.date=old.date;
+     a=a.map(x=>String(x.id)===String(oldId)?rec:x);window.hankkiEditingId=null;
+     document.getElementById("editingBanner")?.classList.remove("open");
+   }else{a.unshift(rec)}
+   put(a);refresh();
+   setTimeout(()=>{document.getElementById("successPlace").textContent=rec.place+" 기록이 한끼달력과 한끼지도에 추가됐어요.";document.getElementById("saveSuccess").classList.add("open");save.textContent="✓ 저장 완료";if(navigator.vibrate)navigator.vibrate(60)},80);
+ }
+ const save=document.getElementById("saveMealLocal");
+ save&&save.addEventListener("click",function(){
+   if(saving)return;const rec=build(),notice=document.getElementById("saveNotice");
+   if(!rec.place){notice.style.display="block";notice.textContent="식당 이름을 먼저 입력해주세요.";return}
+   const dup=get().find(x=>isDup(rec,x)&&String(x.id)!==String(window.hankkiEditingId||""));
+   if(dup){pending=rec;document.getElementById("duplicateText").textContent="오늘 "+rec.place+" · "+(rec.menu||"메뉴 없음")+(rec.price?" · "+Number(rec.price).toLocaleString()+"원":"")+" 기록이 이미 있습니다.";document.getElementById("duplicateModal").classList.add("open");return}
+   commit(rec);
+ });
+ document.getElementById("forceDuplicate")?.addEventListener("click",()=>{document.getElementById("duplicateModal").classList.remove("open");if(pending){const r=pending;pending=null;commit(r)}});
+ document.getElementById("cancelDuplicate")?.addEventListener("click",()=>{pending=null;document.getElementById("duplicateModal").classList.remove("open");document.querySelector('[data-page="마이"]')?.click()});
+ document.getElementById("successClose")?.addEventListener("click",()=>{document.getElementById("saveSuccess").classList.remove("open");document.getElementById("recordOverlay")?.classList.remove("open");document.body.style.overflow="";});
+ document.querySelectorAll(".recentMini").forEach(b=>b.addEventListener("click",function(){const n=b.querySelector("b");if(n)document.getElementById("mealPlace").value=n.textContent;document.getElementById("mealForm").scrollIntoView({behavior:"smooth",block:"center"})}));
+ refresh();
+})();
+</script><script>
+(function(){
+ window.hankkiPhotos=[];
+ const MAX=5, preview=document.getElementById("photoPreview");
+ function render(){
+   if(!preview)return; preview.innerHTML="";
+   window.hankkiPhotos.forEach((src,i)=>{
+     const d=document.createElement("div");d.className="photoThumb";
+     d.innerHTML='<img alt="한끼 기록 사진"><button type="button" aria-label="사진 삭제">×</button>';
+     d.querySelector("img").src=src;
+     d.querySelector("button").onclick=()=>{window.hankkiPhotos.splice(i,1);render()};
+     preview.appendChild(d);
+   });
+   if(window.hankkiPhotos.length<MAX){const c=document.createElement("div");c.className="photoCount";c.textContent=window.hankkiPhotos.length+" / "+MAX;preview.appendChild(c)}
+ }
+ function compress(file){
+   return new Promise((resolve,reject)=>{
+     const r=new FileReader();
+     r.onload=()=>{const img=new Image();img.onload=()=>{
+       const max=900,scale=Math.min(1,max/Math.max(img.width,img.height));
+       const c=document.createElement("canvas");c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);
+       c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+       resolve(c.toDataURL("image/jpeg",.72));
+     };img.onerror=reject;img.src=r.result};r.onerror=reject;r.readAsDataURL(file);
+   });
+ }
+ async function add(files){
+   const room=MAX-window.hankkiPhotos.length;
+   for(const f of [...files].slice(0,room)){if(!f.type.startsWith("image/"))continue;try{window.hankkiPhotos.push(await compress(f))}catch(e){}}
+   render();
+ }
+ ["cameraInput","albumInput"].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener("change",async e=>{await add(e.target.files);e.target.value=""})});
+ render();
+})();
+</script><script>
+(function(){
+ const KEY="hankki_meals_v1";
+ function meals(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
+ function localDay(iso){const d=new Date(iso);return d.getDate()}
+ function tasteClass(t){return t==="love"?"love":t==="bad"?"bad":"ok"}
+ function renderSavedMy(){
+   const screen=document.getElementById("screen"),title=document.getElementById("title"),body=document.getElementById("body");
+   if(!screen||!title||!body)return;
+   const all=meals(), now=new Date(), yr=now.getFullYear(), mo=now.getMonth();
+   const month=all.filter(r=>{const d=new Date(r.date);return d.getFullYear()===yr&&d.getMonth()===mo});
+   const byDay={};month.forEach(r=>(byDay[localDay(r.date)]??=[]).push(r));
+   const unique=new Set(month.map(r=>r.place)).size;
+   const loves=new Set(month.filter(r=>r.taste==="love").map(r=>r.place)).size;
+   const values=new Set(month.filter(r=>r.value).map(r=>r.place)).size;
+   const first=new Date(yr,mo,1).getDay(), total=new Date(yr,mo+1,0).getDate();
+   let cells="";for(let i=0;i<first;i++)cells+='<button class="day empty" disabled></button>';
+   for(let d=1;d<=total;d++){const rs=byDay[d]||[],r=rs[0],cls=r?(" has "+tasteClass(r.taste)+(r.value?" value":"")):"";cells+='<button class="day'+cls+'" data-live-day="'+d+'">'+d+(r?'<span class="dot"></span>':'')+'</button>'}
+   body.innerHTML='<div class="myPage"><section class="mySummary"><small>'+yr+'년 '+(mo+1)+'월</small><h3>나의 한끼 기록 🍚</h3><div class="myStats"><div><b>'+month.length+'끼</b><small>이번 달</small></div><div><b>'+unique+'곳</b><small>방문 식당</small></div><div><b>'+loves+'곳</b><small>❤️ 인생맛집</small></div><div><b>'+values+'곳</b><small>👑 가성비</small></div></div></section><section class="calendarBox"><div class="calHead"><button>‹</button><h3>'+yr+'년 '+(mo+1)+'월</h3><button>›</button></div><div class="week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="days">'+cells+'</div><div class="legendCal"><span>🔴 정말 맛있음</span><span>🟡 괜찮음</span><span>⚫ 아쉬움</span><span>🟢 테두리 가성비 굿</span></div></section><section id="liveDiaryDetail" class="diaryDetail"></section></div>';
+   screen.style.display="block";
+   function show(day){
+     document.querySelectorAll("[data-live-day]").forEach(x=>x.classList.toggle("selected",Number(x.dataset.liveDay)===day));
+     const rs=byDay[day]||[], box=document.getElementById("liveDiaryDetail");
+     if(!rs.length){box.innerHTML='<h3>'+(mo+1)+'월 '+day+'일</h3><p class="noMeal">아직 남긴 한끼 기록이 없어요.</p>';return}
+     box.innerHTML='<h3>'+(mo+1)+'월 '+day+'일 · 나의 한끼</h3>'+rs.map(r=>{
+       const photos=(r.photos||[]); const tags=[r.taste==="love"?"❤️ 인생맛집":r.taste==="bad"?"👎 아쉬워요":"🙂 괜찮아요",r.value?"👑 가성비 굿":""].filter(Boolean);
+       return '<div class="mealEntry" data-record-id="'+r.id+'"><b>'+r.place+'</b><strong>'+(r.menu||"메뉴 기록 없음")+(r.price?' · '+Number(r.price).toLocaleString()+'원':'')+'</strong><div class="mealMeta"><span>👥 '+(r.withWho||"")+'</span>'+tags.map(t=>'<span>'+t+'</span>').join("")+'</div>'+(photos.length?'<div class="savedPhotoStrip">'+photos.map(p=>'<img src="'+p+'" alt="한끼 사진">').join("")+'</div>':'')+(r.memo?'<p>📝 '+r.memo+'</p>':'')+'<div class="recordActionRow"><button type="button" class="recordEditBtn" data-edit-record="'+r.id+'">✏️ 수정</button><button type="button" class="recordDeleteBtn" data-delete-record="'+r.id+'">🗑️ 삭제</button></div><div class="privacyNote"><b>🔒 나만 보는 기록</b> · 사진, 동행, 기분과 개인 메모는 공개되지 않아요.</div></div>'
+     }).join("");
+     box.querySelectorAll("[data-delete-meal]").forEach(btn=>btn.addEventListener("click",function(){
+       if(!confirm("이 한끼 기록을 삭제할까요?"))return;
+       let a=meals().filter(x=>String(x.id)!==String(btn.dataset.deleteMeal));
+       localStorage.setItem(KEY,JSON.stringify(a)); renderSavedMy();
+     }));
+   }
+   document.querySelectorAll("[data-live-day]").forEach(x=>x.addEventListener("click",()=>show(Number(x.dataset.liveDay))));
+   const today=now.getDate();show(byDay[today]?today:(Object.keys(byDay)[0]?Number(Object.keys(byDay)[0]):today));
+ }
+ document.querySelectorAll('[data-page="마이"]').forEach(btn=>btn.addEventListener("click",function(e){e.stopImmediatePropagation();renderSavedMy()},true));
+})();
+</script><script>
+(function(){
+ const panel=document.getElementById("newPlacePanel"),name=document.getElementById("discoveryName"),status=document.getElementById("locationStatus"),confirm=document.getElementById("confirmDiscovery"),addrBox=document.getElementById("addressBox"),addr=document.getElementById("discoveryAddress");
+ let locationData=null;
+ function showStatus(text,data){locationData=data;status.style.display="block";status.textContent=text;confirm.disabled=!(name.value.trim()&&locationData)}
+ function select(btn){document.querySelectorAll(".locationWays button").forEach(x=>x.classList.remove("selected"));btn.classList.add("selected")}
+ document.querySelectorAll('[data-sheet-action="new"]').forEach(b=>b.addEventListener("click",function(){panel.classList.add("open");panel.scrollIntoView({behavior:"smooth",block:"center"})}));
+ document.getElementById("closeNewPlace").addEventListener("click",()=>panel.classList.remove("open"));
+ name.addEventListener("input",()=>confirm.disabled=!(name.value.trim()&&locationData));
+ document.getElementById("useCurrentLocation").addEventListener("click",function(){
+   select(this);addrBox.classList.remove("open");
+   if(!navigator.geolocation){showStatus("이 브라우저에서는 현재 위치를 사용할 수 없어요.",null);return}
+   status.style.display="block";status.textContent="현재 위치를 확인하고 있어요…";
+   navigator.geolocation.getCurrentPosition(
+    p=>showStatus("✓ 현재 위치가 선택됐어요.",{type:"gps",lat:p.coords.latitude,lng:p.coords.longitude}),
+    ()=>showStatus("현재 위치를 확인하지 못했어요. 주소 입력을 이용해주세요.",null),
+    {enableHighAccuracy:true,timeout:8000,maximumAge:60000});
+ });
+ document.getElementById("useAddress").addEventListener("click",function(){select(this);addrBox.classList.add("open");addr.focus()});
+ document.getElementById("confirmAddress").addEventListener("click",()=>{const v=addr.value.trim();if(v)showStatus("✓ 주소: "+v,{type:"address",address:v})});
+ document.getElementById("useMapPoint").addEventListener("click",function(){select(this);addrBox.classList.add("open");showStatus("지도 연결 전 테스트 단계예요. 우선 주소를 입력해 위치를 지정해주세요.",null)});
+ confirm.addEventListener("click",function(){
+   const mealPlace=document.getElementById("mealPlace");if(mealPlace)mealPlace.value=name.value.trim();
+   panel.classList.remove("open");
+   const form=document.getElementById("mealForm");if(form)form.scrollIntoView({behavior:"smooth",block:"start"});
+   window.hankkiPendingLocation=locationData;
+ });
+})();
+</script><script>
+(function(){
+ const sheet=document.querySelector(".recordSheet");
+ if(sheet)sheet.addEventListener("click",e=>e.stopPropagation());
+ const newBtn=document.querySelector('[data-sheet-action="new"]');
+ const panel=document.getElementById("newPlacePanel");
+ if(newBtn&&panel)newBtn.addEventListener("click",function(e){
+   e.preventDefault();
+   panel.classList.add("open");
+   requestAnimationFrame(()=>panel.scrollIntoView({behavior:"smooth",block:"center"}));
+ });
+})();
+</script><script>
+(function(){const KEY="hankki_meals_v1",map=document.getElementById("__schematicMapDisabled"),popup=document.getElementById("pinPopup");if(!map)return;function get(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}function hash(str){let h=0;for(const c of str)h=((h<<5)-h)+c.charCodeAt(0);return Math.abs(h)}function coords(r){if(r.location&&r.location.type==="gps"&&Number.isFinite(r.location.lat)&&Number.isFinite(r.location.lng)){return{x:18+(Math.abs(r.location.lng*10000)%64),y:24+(Math.abs(r.location.lat*10000)%52)}}const h=hash(r.place||"");return{x:15+(h%70),y:22+((Math.floor(h/71))%55)}}function render(filter="all"){map.querySelectorAll(".livePin,.mapEmpty").forEach(x=>x.remove());const all=get(),grouped={};all.forEach(r=>{if(!grouped[r.place])grouped[r.place]=r});let rows=Object.values(grouped).filter(r=>filter==="all"||(filter==="value"?r.value:r.taste===filter));if(!rows.length){const e=document.createElement("div");e.className="mapEmpty";e.textContent=all.length?"이 조건에 해당하는 한끼 기록이 아직 없어요.":"한끼를 기록하면 여기에 나만의 핀이 생겨요.";map.appendChild(e);return}rows.forEach(r=>{const c=coords(r),b=document.createElement("button");b.type="button";b.className="livePin "+(r.taste||"ok")+(r.value?" value":"");b.style.left=c.x+"%";b.style.top=c.y+"%";b.innerHTML="<span>"+(r.taste==="love"?"♥":r.taste==="bad"?"▼":"●")+"</span>";b.addEventListener("click",()=>{popup.classList.add("open");popup.innerHTML="<b>"+r.place+"</b><span>"+(r.menu||"메뉴 기록 없음")+(r.price?" · "+Number(r.price).toLocaleString()+"원":"")+"</span><small>"+(r.taste==="love"?"❤️ 인생맛집":r.taste==="bad"?"👎 아쉬워요":"🙂 괜찮아요")+(r.value?" · 👑 가성비 굿":"")+"</small>"});map.appendChild(b)})}document.querySelectorAll(".mapFilter").forEach(b=>b.addEventListener("click",function(){document.querySelectorAll(".mapFilter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(b.dataset.mapFilter)}));render();const save=document.getElementById("saveMealLocal");if(save)save.addEventListener("click",()=>setTimeout(()=>render(document.querySelector(".mapFilter.active")?.dataset.mapFilter||"all"),20));})();
+</script><script>
+(function(){
+ const KEY="hankki_meals_v1";
+ let map=null, overlays=[];
+ const mapEl=document.getElementById("kakaoMealMap"), fallback=document.getElementById("mapFallback"), popup=document.getElementById("pinPopup");
+ function records(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
+ function grouped(filter){
+   const groups=new Map();
+   records().forEach(r=>{
+     if(!(r.location&&r.location.type==="gps"&&Number.isFinite(r.location.lat)&&Number.isFinite(r.location.lng)))return;
+     if(!groups.has(r.place))groups.set(r.place,[]);
+     groups.get(r.place).push(r);
+   });
+   return [...groups.entries()].map(([place,items])=>{
+     items.sort((a,b)=>new Date(b.date)-new Date(a.date));
+     const latest=items[0];
+     const love=items.some(x=>x.taste==="love"), bad=items.some(x=>x.taste==="bad"), value=items.some(x=>x.value);
+     const taste=love?"love":(bad?"bad":(latest.taste||"ok"));
+     return {place,items,latest,taste,value,location:latest.location};
+   }).filter(g=>filter==="all"||(filter==="value"?g.value:g.taste===filter));
+ }
+ function init(){
+   if(!(window.kakao&&kakao.maps&&mapEl)){
+     if(fallback)fallback.innerHTML='카카오 지도 설정이 필요해요.<br><b>config.js의 KAKAO_JS_KEY</b>와 GitHub Pages 도메인을 확인해주세요.';
+     return;
+   }
+   kakao.maps.load(function(){
+     const rows=grouped("all"), center=rows[0]?new kakao.maps.LatLng(rows[0].location.lat,rows[0].location.lng):new kakao.maps.LatLng(35.267,129.233);
+     map=new kakao.maps.Map(mapEl,{center:center,level:5});
+     fallback&&fallback.classList.add("hidden");
+     render("all");
+   });
+ }
+ function clear(){overlays.forEach(o=>o.setMap(null));overlays=[]}
+ function render(filter){
+   if(!map)return; clear();
+   const rows=grouped(filter);
+   if(!rows.length){if(popup){popup.classList.add("open");popup.innerHTML="<b>아직 위치가 저장된 한끼가 없어요.</b><span>새로운 식당 발견에서 ‘현재 위치로 등록’을 사용하면 실제 지도에 핀이 생겨요.</span>"}return}
+   const bounds=new kakao.maps.LatLngBounds();
+   rows.forEach(r=>{
+     const pos=new kakao.maps.LatLng(r.location.lat,r.location.lng), el=document.createElement("button");
+     el.type="button";el.className="kakaoPin "+r.taste+(r.value?" value":"");el.innerHTML='<span>🍴</span>'+(r.value?'<i class="crownBadge">♛</i>':'')+(r.items.length>1?'<i class="visitBadgePin">'+r.items.length+'</i>':'');
+     el.addEventListener("click",()=>{
+       const latest=r.latest, photos=(latest.photos||[]).slice(0,4);
+       const fmt=d=>{const x=new Date(d);return (x.getMonth()+1)+"월 "+x.getDate()+"일"};
+       const tasteLabel=r.taste==="love"?"❤️ 인생맛집":r.taste==="bad"?"👎 아쉬움":"🙂 괜찮음";
+       const firstPhoto=photos[0]||"";
+       popup.classList.add("open");
+       popup.innerHTML='<div class="placePopupTop"><div><b>'+r.place+'</b><small>'+tasteLabel+(r.value?' · 👑 가성비 굿':'')+'</small></div><span class="visitCount">'+r.items.length+'회 방문</span></div>'+
+       '<div class="popupHero'+(firstPhoto?'':' noPhoto')+'">'+(firstPhoto?'<img src="'+firstPhoto+'" alt="최근 한끼 사진">':'')+
+       '<div><div class="popupTags">'+tasteLabel+(r.value?' · 👑 가성비 굿':'')+'</div><div class="recentMeal"><strong>최근 방문 · '+fmt(latest.date)+'</strong><small>'+(latest.menu||"메뉴 기록 없음")+(latest.price?' · '+Number(latest.price).toLocaleString()+'원':'')+(latest.withWho?' · '+latest.withWho:'')+'</small></div></div></div>'+
+       (photos.length>1?'<div class="popupPhotos">'+photos.slice(1).map(p=>'<img src="'+p+'" alt="한끼 사진">').join("")+'</div>':'')+
+       '<button class="historyBtn" type="button">내 한끼 기록 '+r.items.length+'개 보기 ›</button><div class="placeHistory">'+r.items.map(x=>'<div class="historyItem" data-record-id="'+x.id+'"><b>'+fmt(x.date)+' · '+(x.menu||"메뉴 기록 없음")+'</b><span>'+(x.price?Number(x.price).toLocaleString()+'원 · ':'')+(x.withWho||"")+'</span>'+(x.memo?'<p>📝 '+x.memo+'</p>':'')+'<div class="recordActionRow"><button type="button" class="recordEditBtn" data-edit-record="'+x.id+'">✏️ 수정</button><button type="button" class="recordDeleteBtn" data-delete-record="'+x.id+'">🗑️ 삭제</button></div></div>').join("")+'</div>';
+       const hb=popup.querySelector(".historyBtn"),hist=popup.querySelector(".placeHistory");
+       hb.addEventListener("click",()=>{hist.classList.toggle("open");hb.textContent=hist.classList.contains("open")?"기록 접기":"내 한끼 기록 "+r.items.length+"개 보기 ›"});
+     });
+     const ov=new kakao.maps.CustomOverlay({position:pos,content:el,yAnchor:1.1});ov.setMap(map);overlays.push(ov);bounds.extend(pos);
+   });
+   if(rows.length>1)map.setBounds(bounds); else map.setCenter(new kakao.maps.LatLng(rows[0].location.lat,rows[0].location.lng));
+ }
+ document.querySelectorAll(".mapFilter").forEach(b=>b.addEventListener("click",function(){document.querySelectorAll(".mapFilter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(b.dataset.mapFilter)}));
+ const save=document.getElementById("saveMealLocal");if(save)save.addEventListener("click",()=>setTimeout(()=>render(document.querySelector(".mapFilter.active")?.dataset.mapFilter||"all"),40));
+ if(window.kakao&&window.kakao.maps){init();}
+ else if(window.__hankkiKakaoScript){
+   window.__hankkiKakaoScript.addEventListener("load",init,{once:true});
+   window.__hankkiKakaoScript.addEventListener("error",()=>{if(fallback)fallback.innerHTML="카카오 지도 SDK를 불러오지 못했어요.<br>JavaScript 키와 JS SDK 도메인을 확인해주세요.";},{once:true});
+ } else { setTimeout(init,300); }
+})();
+</script><script>
+(function(){
+ const KEY="hankki_meals_v1"; let currentId=null;
+ const modal=document.getElementById("recordManageModal"),summary=document.getElementById("manageSummary");
+ function all(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
+ function saveAll(a){localStorage.setItem(KEY,JSON.stringify(a))}
+ function openManage(id){
+   const r=all().find(x=>String(x.id)===String(id));if(!r)return;
+   currentId=r.id;summary.textContent=r.place+" · "+(r.menu||"메뉴 기록 없음")+(r.price?" · "+Number(r.price).toLocaleString()+"원":"");modal.classList.add("open");
+ }
+ document.addEventListener("click",function(e){
+   const target=e.target.closest("[data-record-id]");if(target){e.preventDefault();e.stopPropagation();openManage(target.dataset.recordId)}
+ });
+ document.getElementById("closeManageBtn")?.addEventListener("click",()=>modal.classList.remove("open"));
+ document.getElementById("deleteRecordBtn")?.addEventListener("click",function(){
+   if(currentId==null||!confirm("이 한끼 기록을 삭제할까요?\\n한끼달력과 한끼지도에서도 사라져요."))return;
+   saveAll(all().filter(x=>String(x.id)!==String(currentId)));modal.classList.remove("open");
+   const myBtn=[...document.querySelectorAll('[data-page="마이"]')].pop();if(myBtn)myBtn.click();
+   const popup=document.getElementById("pinPopup");if(popup){popup.classList.remove("open");popup.innerHTML="";}
+   document.querySelector(".mapFilter.active")?.click();
+ });
+ document.getElementById("editRecordBtn")?.addEventListener("click",function(){
+   const r=all().find(x=>String(x.id)===String(currentId));if(!r)return;
+   modal.classList.remove("open");window.hankkiEditingId=r.id;
+   document.getElementById("mealPlace").value=r.place||"";document.getElementById("mealMenu").value=r.menu||"";document.getElementById("mealPrice").value=r.price||"";document.getElementById("mealWith").value=r.withWho||"혼자";document.getElementById("mealMemo").value=r.memo||"";document.getElementById("mealValue").checked=!!r.value;
+   window.hankkiPhotos=[...(r.photos||[])];window.hankkiPendingLocation=r.location||null;
+   document.querySelectorAll(".tastePick [data-taste]").forEach(b=>b.classList.toggle("selected",b.dataset.taste===(r.taste||"ok")));
+   document.getElementById("editingBanner").classList.add("open");
+   const save=document.getElementById("saveMealLocal");save.disabled=false;save.textContent="변경사항 저장";
+   document.getElementById("recordOverlay").classList.add("open");document.body.style.overflow="hidden";document.getElementById("mealForm").scrollIntoView({behavior:"smooth",block:"start"});
+ });
+})();
+</script><script>
+(function(){
+ const KEY="hankki_meals_v1";
+ function all(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
+ function write(a){localStorage.setItem(KEY,JSON.stringify(a))}
+ function edit(id){
+   const r=all().find(x=>String(x.id)===String(id));if(!r)return;
+   window.hankkiEditingId=r.id;
+   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v??""};
+   set("mealPlace",r.place);set("mealMenu",r.menu);set("mealPrice",r.price);set("mealWith",r.withWho||"혼자");set("mealMemo",r.memo);
+   const val=document.getElementById("mealValue");if(val)val.checked=!!r.value;
+   window.hankkiPhotos=[...(r.photos||[])];window.hankkiPendingLocation=r.location||null;
+   document.querySelectorAll(".tastePick [data-taste]").forEach(b=>b.classList.toggle("selected",b.dataset.taste===(r.taste||"ok")));
+   document.getElementById("editingBanner")?.classList.add("open");
+   const save=document.getElementById("saveMealLocal");if(save){save.disabled=false;save.textContent="변경사항 저장"}
+   const screen=document.getElementById("screen");if(screen)screen.style.display="none";
+   const overlay=document.getElementById("recordOverlay");if(overlay){overlay.classList.add("open");overlay.setAttribute("aria-hidden","false")}
+   document.body.style.overflow="hidden";
+   setTimeout(()=>document.getElementById("mealForm")?.scrollIntoView({behavior:"smooth",block:"start"}),50);
+ }
+ function del(id){
+   const r=all().find(x=>String(x.id)===String(id));if(!r)return;
+   if(!confirm((r.place||"이 한끼")+" 기록을 삭제할까요?\\n한끼달력과 한끼지도에서도 사라져요."))return;
+   write(all().filter(x=>String(x.id)!==String(id)));
+   // 전체 페이지를 새로고침하지 않고 현재 화면만 갱신
+   const saved=document.getElementById("savedCount");
+   if(saved) saved.textContent=all().length+"끼 기록";
+   const modal=document.getElementById("recordManageModal");
+   if(modal) modal.classList.remove("open");
+   const row=document.querySelector('[data-record-id="'+id+'"]');
+   if(row) row.remove();
+   // 마이 화면이 열려 있으면 마이 버튼을 다시 실행해 달력/통계를 즉시 갱신
+   const screen=document.getElementById("screen");
+   if(screen && screen.style.display!=="none"){
+     const myBtn=[...document.querySelectorAll('[data-page="마이"]')].pop();
+     if(myBtn) myBtn.click();
+   }
+   // 지도 기록 목록에서 삭제한 경우 팝업을 닫아 다음 터치에서 최신 데이터를 다시 표시
+   const popup=document.getElementById("pinPopup");
+   if(popup){popup.classList.remove("open");popup.innerHTML="";}
+   // 카카오 지도 핀은 다음 필터 클릭/저장 시 최신 데이터로 즉시 재렌더링
+   document.querySelector(".mapFilter.active")?.click();
+ }
+ document.addEventListener("click",function(e){
+   const eb=e.target.closest("[data-edit-record]");if(eb){e.preventDefault();e.stopPropagation();edit(eb.dataset.editRecord);return}
+   const db=e.target.closest("[data-delete-record]");if(db){e.preventDefault();e.stopPropagation();del(db.dataset.deleteRecord);return}
+ });
+})();
+</script><script>
+(function(){
+ const screen=document.getElementById("screen"),title=document.getElementById("title"),body=document.getElementById("body");
+ const restaurants={
+  "일광돼지국밥":{img:"assets/food1.webp",price:"6,500원",addr:"부산 기장군 일광읍",hours:"11:00 ~ 21:00",closed:"정보 확인 중",phone:"전화 정보 확인 중",badges:["🔁 다시 찾는 곳","👑 가성비"],menus:[["돼지국밥","6,500원"],["수육백반","정보 확인 중"]],verify:"가격정보가 최근 한끼발견에서 확인됐어요."},
+  "바다향 파스타":{img:"assets/food2.webp",price:"9,000원",addr:"부산 기장군 일광읍",hours:"영업시간 확인 중",closed:"휴무 정보 확인 중",phone:"전화 정보 확인 중",badges:["👑 가성비","🍝 동네 발견"],menus:[["새우 파스타","9,000원"],["대표 파스타","정보 확인 중"]],verify:"동네 이용자의 한끼 기록이 쌓이고 있어요."},
+  "카페 모먼트":{img:"assets/food3.webp",price:"3,500원",addr:"부산 기장군 일광읍",hours:"영업시간 확인 중",closed:"휴무 정보 확인 중",phone:"전화 정보 확인 중",badges:["🌱 새로 발견된 곳"],menus:[["커피","3,500원"],["디저트","정보 확인 중"]],verify:"아직 현장 확인 정보가 많지 않은 새 발견 식당이에요."}
+ };
+ const WISH_KEY="hankki_favorites_v1";
+ function wishes(){try{return JSON.parse(localStorage.getItem(WISH_KEY)||"[]")}catch(e){return[]}}
+ function isWished(name){return wishes().includes(name)}
+ function syncWish(name){
+   const on=isWished(name);
+   document.querySelectorAll('[data-wish="'+CSS.escape(name)+'"]').forEach(b=>{
+     b.classList.toggle("favorited",on);
+     b.textContent=on?(b.classList.contains("wish")?"♥ 찜했어요":"♥ 찜"):(b.classList.contains("wish")?"♡ 찜하기":"♡ 찜");
+   });
+ }
+ function toggleWish(name){
+   let a=wishes(),on=a.includes(name);
+   a=on?a.filter(x=>x!==name):[...a,name];
+   localStorage.setItem(WISH_KEY,JSON.stringify(a));syncWish(name);
+   if(navigator.vibrate)navigator.vibrate(35);
+ }
+ function saved(){try{return JSON.parse(localStorage.getItem("hankki_meals_v1")||"[]")}catch(e){return[]}}
+ function render(name){
+   const r=restaurants[name];if(!r||!screen||!body)return;
+   title.textContent=name;
+   const mine=saved().filter(x=>x.place===name).sort((a,b)=>new Date(b.date)-new Date(a.date)),last=mine[0];
+   body.innerHTML='<div class="restaurantDetail"><div class="detailHero"><img src="'+r.img+'" alt="'+name+'"></div><div class="detailMain"><div class="detailTitleRow"><div><h2>'+name+'</h2><div class="detailBadges">'+r.badges.map(x=>'<span>'+x+'</span>').join("")+'</div></div><button type="button" class="detailWish" data-wish="">♡ 찜</button></div><div class="detailInfo"><div><b>주소</b><span>'+r.addr+' · 지도에서 보기 ›</span></div><div><b>영업시간</b><span>'+r.hours+'</span></div><div><b>휴무</b><span>'+r.closed+'</span></div><div><b>전화</b><span>'+r.phone+'</span></div></div><section class="detailSection"><h3>대표 메뉴와 가격</h3><div class="menuList">'+r.menus.map(m=>'<div class="menuRow"><strong>'+m[0]+'</strong><span>'+m[1]+'</span></div>').join("")+'</div></section><section class="detailSection"><h3>최근 현장 정보</h3><div class="verifyBox">✓ '+r.verify+'<br>정보가 달라졌다면 한끼 기록에서 알려줄 수 있어요.</div></section><section class="detailSection"><h3>나의 기록</h3><div class="myPlaceBox">'+(mine.length?'<b>이 식당에 '+mine.length+'번 방문했어요.</b><p>최근 방문 '+new Date(last.date).toLocaleDateString("ko-KR")+'<br>'+(last.menu||"메뉴 기록 없음")+(last.price?' · '+Number(last.price).toLocaleString()+'원':'')+(last.withWho?' · '+last.withWho:'')+'</p><button type="button" data-page="마이">내 한끼 기록 보기 ›</button>':'<b>아직 나의 한끼 기록이 없어요.</b><p>다음 방문 때 한끼를 남겨보세요.</p>')+'</div></section></div><div class="detailBottom"><button class="wish" data-wish="">♡ 찜하기</button><button class="recordHere" data-record-here="'+name+'">＋ 이곳에서 한끼 기록</button></div></div>';
+   screen.style.display="block";
+   body.querySelectorAll("[data-wish]").forEach(b=>b.dataset.wish=name);
+   syncWish(name);
+ }
+ document.addEventListener("click",function(e){
+   const wb=e.target.closest("[data-wish]");
+   if(wb&&wb.dataset.wish){e.preventDefault();e.stopPropagation();toggleWish(wb.dataset.wish);return}
+   const card=e.target.closest(".card[data-page]");
+   if(card&&restaurants[card.dataset.page]){e.preventDefault();e.stopPropagation();render(card.dataset.page);return}
+   const rb=e.target.closest("[data-record-here]");
+   if(rb){e.preventDefault();e.stopPropagation();screen.style.display="none";document.getElementById("mealPlace").value=rb.dataset.recordHere;document.getElementById("recordOverlay").classList.add("open");document.body.style.overflow="hidden";setTimeout(()=>document.getElementById("mealForm").scrollIntoView({behavior:"smooth",block:"start"}),30)}
+ },true);
+})();
+</script></body></html>
