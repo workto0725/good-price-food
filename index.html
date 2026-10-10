@@ -532,7 +532,7 @@ function ask(o){
 
 /* 시트 스택 + 안드로이드 뒤로가기 지원 */
 var stack=[],skipPop=0,formDirty=false,forceClose=false;
-function lockScroll(){document.body.style.overflow=stack.length?'hidden':''}
+function lockScroll(){document.body.style.overflow=stack.length?'hidden':'';stack.forEach(function(id,index){$('#'+id).style.zIndex=60+index})}
 function openSheet(id){if(stack.indexOf(id)>=0)return;stack.push(id);$('#'+id).classList.add('open');history.pushState({s:id},'');lockScroll()}
 function removeSheet(id){var i=stack.lastIndexOf(id);if(i>=0)stack.splice(i,1);$('#'+id).classList.remove('open');lockScroll()}
 function closeSheet(id){if(stack.indexOf(id)<0)return;removeSheet(id);skipPop++;history.back()}
